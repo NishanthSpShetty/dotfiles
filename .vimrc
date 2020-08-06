@@ -6,6 +6,7 @@
 
 " Gotta be first
 set nocompatible
+set encoding=UTF-8
 
 filetype off
 
@@ -21,7 +22,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " ----- Vim as a programmer's text editor -----------------------------
-Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'xolox/vim-misc'
@@ -29,7 +30,8 @@ Plugin 'xolox/vim-easytags'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/a.vim'
-
+Plugin 'preservim/nerdtree' |
+            \ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
@@ -54,6 +56,7 @@ Plugin 'racer-rust/vim-racer'
 Plugin 'mattn/vim-goimports'
 
 let g:coc_disable_startup_warning = 1
+
 
 
 " ---- Extras/Advanced plugins ----------------------------------------
@@ -220,4 +223,19 @@ endfunction
 
 " fugitive config
 set diffopt+=vertical
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+let g:NERDTreeGitStatusShowClean = 1
+
 
