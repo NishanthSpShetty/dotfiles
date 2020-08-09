@@ -9,6 +9,7 @@ set nocompatible
 set encoding=UTF-8
 
 filetype off
+filetype plugin on
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -32,6 +33,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/a.vim'
 Plugin 'preservim/nerdtree' |
             \ Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'easymotion/vim-easymotion'
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
@@ -52,8 +54,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'fatih/vim-go'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'racer-rust/vim-racer'
-Plugin 'rust-lang/rust.vim'
-
+"Plugin 'roman/golden-ratio'
 Plugin 'mattn/vim-goimports'
 
 let g:coc_disable_startup_warning = 1
@@ -65,8 +66,8 @@ let g:coc_disable_startup_warning = 1
 "Plugin 'ntpeters/vim-better-whitespace'
 " Easily surround chunks of text
 "Plugin 'tpope/vim-surround'
-"Align CSV files at commas, align Markdown tables, and more
-Plugin 'godlygeek/tabular'
+" Align CSV files at commas, align Markdown tables, and more
+"Plugin 'godlygeek/tabular'
 " Automaticall insert the closing HTML tag
 "Plugin 'HTML-AutoCloseTag'
 " Make tmux look like vim-airline (read README for extra instructions)
@@ -101,7 +102,7 @@ hi clear SignColumn
 
 " ----- altercation/vim-colors-solarized settings -----
 " Toggle this to "light" for light colorscheme
-"set background=light
+set background=light
 
 " Uncomment the next line if your terminal is not configured for solarized
 "let g:solarized_termcolors=256
@@ -127,7 +128,7 @@ let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled = 1
 
 " Use the solarized theme for the Airline status bar
-let g:airline_theme='night_owl'
+let g:airline_theme='solarized'
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -169,7 +170,6 @@ let g:airline#extensions#hunks#non_zero_only = 1
 
 " ----- Raimondi/delimitMate settings -----
 let delimitMate_expand_cr = 1
-
 augroup mydelimitMate
   au!
   au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
@@ -188,11 +188,10 @@ noremap K :SuperMan <cword><CR>
 let g:coc_global_extensions = ['coc-solargraph', 'coc-go', 'coc-rust-analyzer']
 
 set hidden
-let g:racer_cmd = "/home/nishanth/.cargo/bin/racer"
+let g:racer_cmd = "/Users/nishanth/.cargo/bin/racer"
 
 let g:racer_experimental_completer = 1
 let g:racer_insert_paren = 1
-
 augroup Racer
     autocmd!
     autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def)
@@ -226,17 +225,6 @@ endfunction
 
 " fugitive config
 set diffopt+=vertical
-"hi Pmenu ctermbg=white
-"hi Pmenu ctermfg=red
-"hi PmenuSel ctermbg=blue
-"hi PmenuSel ctermfg=white
-
-hi Pmenu ctermbg=13
-hi Pmenu ctermfg=white
-
-hi PmenuSel ctermbg=white
-hi PmenuSel ctermfg=242
-let g:rustfmt_autosave = 1
 
 let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Modified'  :'✹',
@@ -251,5 +239,6 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Unknown'   :'?',
                 \ }
 let g:NERDTreeGitStatusShowClean = 1
-
+"To enable easymotion 
+map <Leader> <Plug>(easymotion-prefix)
 
