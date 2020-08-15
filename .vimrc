@@ -17,13 +17,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " ----- Making Vim look good ------------------------------------------
+Plugin 'lifepillar/vim-solarized8'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " ----- Vim as a programmer's text editor -----------------------------
-"Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'xolox/vim-misc'
@@ -31,9 +32,11 @@ Plugin 'xolox/vim-easytags'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/a.vim'
-Plugin 'preservim/nerdtree' |
-            \ Plugin 'Xuyuanp/nerdtree-git-plugin'
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'easymotion/vim-easymotion'
+
+Plugin 'luochen1990/rainbow'
+
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
@@ -54,9 +57,11 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'fatih/vim-go'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'racer-rust/vim-racer'
+Plugin 'rust-lang/rust.vim'
+
 "Plugin 'roman/golden-ratio'
 Plugin 'mattn/vim-goimports'
-
+Plugin 'tpope/vim-fireplace'
 let g:coc_disable_startup_warning = 1
 
 
@@ -102,13 +107,13 @@ hi clear SignColumn
 
 " ----- altercation/vim-colors-solarized settings -----
 " Toggle this to "light" for light colorscheme
-set background=light
+"set background=light
 
 " Uncomment the next line if your terminal is not configured for solarized
-"let g:solarized_termcolors=256
+let g:solarized_termcolors=256
 
 " Set the colorscheme
-colorscheme  desert
+colorscheme  solarized8
 
 " ----- bling/vim-airline settings -----
 " Always show statusbar
@@ -201,11 +206,8 @@ augroup Racer
     autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
     autocmd FileType rust nmap <buffer> <leader>gD <Plug>(rust-doc-tab)
 augroup END
-
-
-
-
-
+" let rust auto format on save
+let g:rustfmt_autosave = 1
 
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -242,3 +244,16 @@ let g:NERDTreeGitStatusShowClean = 1
 "To enable easymotion 
 map <Leader> <Plug>(easymotion-prefix)
 
+no <up> :m .-2<CR>==
+no <down> :m .+1<CR>==
+no <left> <NOP>
+no <right> <NOP>
+
+vno <up> <NOP>
+vno <down> <NOP>
+vno <left> <NOP>
+vno <right> <NOP>
+
+let g:rainbow_active = 1
+
+set cursorline
