@@ -1,5 +1,5 @@
 " File: .vimrc
-" Author: Jake Zimmerman <jake@zimmerman.io>
+" Author: <Nishanth Shetty> nishanthspshetty@gmail.com
 "
 " How I configure Vim :P
 "
@@ -19,11 +19,14 @@ Plugin 'VundleVim/Vundle.vim'
 " ----- Making Vim look good ------------------------------------------
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 Plugin 'tomasr/molokai'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " ----- Vim as a programmer's text editor -----------------------------
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-syntastic/syntastic'
@@ -40,6 +43,7 @@ Plugin 'luochen1990/rainbow'
 " ----- Working with Git ----------------------------------------------
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin  'stsewd/fzf-checkout.vim'
 
 " ----- Other text editing features -----------------------------------
 Plugin 'Raimondi/delimitMate'
@@ -63,6 +67,10 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'mattn/vim-goimports'
 Plugin 'tpope/vim-fireplace'
 let g:coc_disable_startup_warning = 1
+
+
+" Haskell plugin
+Plugin 'neovimhaskell/haskell-vim'
 
 
 
@@ -107,13 +115,13 @@ hi clear SignColumn
 
 " ----- altercation/vim-colors-solarized settings -----
 " Toggle this to "light" for light colorscheme
-"set background=light
+set background=dark
 
 " Uncomment the next line if your terminal is not configured for solarized
 let g:solarized_termcolors=256
 
 " Set the colorscheme
-colorscheme  solarized8
+colorscheme  gruvbox
 
 " ----- bling/vim-airline settings -----
 " Always show statusbar
@@ -133,7 +141,8 @@ let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled = 1
 
 " Use the solarized theme for the Airline status bar
-let g:airline_theme='solarized'
+let g:airline_theme='gruvbox'
+
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
@@ -153,13 +162,14 @@ augroup END
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
-set tags=./tags;,~/.vimtags
+set tags=.~/.vimtags
+"set tags=./tags;,~/.vimtags
 " Sensible defaults
 let g:easytags_events = ['BufReadPost', 'BufWritePost']
 let g:easytags_async = 1
-let g:easytags_dynamic_files = 2
+"let g:easytags_dynamic_files = 2
 let g:easytags_resolve_links = 1
-let g:easytags_suppress_ctags_warning = 1
+"let g:easytags_suppress_ctags_warning = 1
 
 " ----- majutsushi/tagbar settings -----
 " Open/close tagbar with \b
@@ -257,3 +267,53 @@ vno <right> <NOP>
 let g:rainbow_active = 1
 
 set cursorline
+
+
+function! OpenCurrentAsNewTab()
+    let l:currentPos = getcurpos()
+    tabedit %
+    call setpos(".", l:currentPos)
+endfunction
+nmap t% :call OpenCurrentAsNewTab()<CR>
+
+nmap td :tabclose<CR>
+nmap tn :tabNext<CR>
+
+set splitright
+set splitbelow
+
+nmap <C-H> :vsp<CR>
+nmap <C-S> :vsp<CR>
+                        
+"Vim fugitive shortcuts
+noremap <leader>gc :GCheckout<CR>
+noremap <leader>gs :G<CR>
+
+"Haskell feature config for COC
+let g:haskell_classic_highlighting = 1
+let g:haskell_indent_if = 3
+let g:haskell_indent_case = 2
+let g:haskell_indent_let = 4
+let g:haskell_indent_where = 6
+let g:haskell_indent_before_where = 2
+let g:haskell_indent_after_bare_where = 2
+let g:haskell_indent_do = 3
+let g:haskell_indent_in = 1
+let g:haskell_indent_guard = 2
+let g:haskell_indent_case_alternative = 1
+let g:cabal_indent_section = 2
+"
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+
+
+"Treat tabs as space
+set expandtab
+set tabstop=4
+
