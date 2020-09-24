@@ -294,8 +294,8 @@ noremap <leader>gs :G<CR>
 noremap <leader>zf :Files<CR>
 noremap <silent> <leader>nf :NERDTreeFind %<CR>
 
-noremap <silent>n :bn<CR>
-noremap <silent>p :bp<CR>
+noremap ,n :bn<CR>
+noremap ,p :bp<CR>
 
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
