@@ -71,6 +71,7 @@ let g:coc_disable_startup_warning = 1
 
 " Haskell plugin
 Plugin 'neovimhaskell/haskell-vim'
+Plugin 'alx741/vim-hindent'
 
 
 
@@ -306,6 +307,14 @@ let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
+"enable haskell-hindent
+
+"install hindent using stack install hindent #some issue with ghc version>8,
+"so use resolver as follows
+"  `stack --resolver lts-14.22 install hindent`
+let g:hindent_command = "stack exec -- hindent"
+let g:hindent_on_save = 1
+let g:hindent_line_length = 100
 
 
 "Treat tabs as space
