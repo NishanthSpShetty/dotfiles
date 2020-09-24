@@ -121,6 +121,7 @@ set background=dark
 let g:solarized_termcolors=256
 
 " Set the colorscheme
+let g:gruvbox_contrast_dark = 'hard'
 colorscheme  gruvbox
 
 " ----- bling/vim-airline settings -----
@@ -285,24 +286,18 @@ set splitbelow
 nmap <C-H> :vsp<CR>
 nmap <C-S> :vsp<CR>
                         
+
 "Vim fugitive shortcuts
 noremap <leader>gc :GCheckout<CR>
 noremap <leader>gs :G<CR>
 
-"Haskell feature config for COC
-let g:haskell_classic_highlighting = 1
-let g:haskell_indent_if = 3
-let g:haskell_indent_case = 2
-let g:haskell_indent_let = 4
-let g:haskell_indent_where = 6
-let g:haskell_indent_before_where = 2
-let g:haskell_indent_after_bare_where = 2
-let g:haskell_indent_do = 3
-let g:haskell_indent_in = 1
-let g:haskell_indent_guard = 2
-let g:haskell_indent_case_alternative = 1
-let g:cabal_indent_section = 2
-"
+noremap <leader>zf :Files<CR>
+noremap <silent> <leader>nf :NERDTreeFind %<CR>
+
+noremap <silent>n :bn<CR>
+noremap <silent>p :bp<CR>
+
+
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
 let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
