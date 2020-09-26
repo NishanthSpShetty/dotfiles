@@ -205,7 +205,12 @@ noremap K :SuperMan <cword><CR>
 let g:coc_global_extensions = ['coc-solargraph', 'coc-go', 'coc-rust-analyzer']
 
 set hidden
-let g:racer_cmd = "/Users/nishanth/.cargo/bin/racer"
+if has('macunix')
+	let g:racer_cmd = "/Users/nishanth/.cargo/bin/racer"
+else
+let g:racer_cmd = "/home/nishanth/.cargo/bin/racer"
+endif
+
 
 let g:racer_experimental_completer = 1
 let g:racer_insert_paren = 1
