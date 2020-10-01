@@ -64,7 +64,7 @@ Plugin 'racer-rust/vim-racer'
 Plugin 'rust-lang/rust.vim'
 
 "Plugin 'roman/golden-ratio'
-Plugin 'mattn/vim-goimports'
+"Plugin 'mattn/vim-goimports'
 Plugin 'tpope/vim-fireplace'
 let g:coc_disable_startup_warning = 1
 
@@ -164,12 +164,12 @@ augroup END
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
-set tags=.~/.vimtags
 "set tags=./tags;,~/.vimtags
+set tags=./tags,tags;$HOME
 " Sensible defaults
 let g:easytags_events = ['BufReadPost', 'BufWritePost']
 let g:easytags_async = 1
-"let g:easytags_dynamic_files = 2
+let g:easytags_dynamic_files = 1
 let g:easytags_resolve_links = 1
 "let g:easytags_suppress_ctags_warning = 1
 
@@ -242,6 +242,30 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 " fugitive config
 set diffopt+=vertical
 
@@ -289,7 +313,7 @@ nmap tn :tabNext<CR>
 set splitright
 set splitbelow
 
-nmap <C-H> :vsp<CR>
+nmap <C-a> :sp<CR>
 nmap <C-S> :vsp<CR>
                         
 
@@ -325,4 +349,9 @@ let g:hindent_line_length = 100
 "Treat tabs as space
 set expandtab
 set tabstop=4
-
+""vim go test out put wrap around
+" wrap long lines in quickfix
+augroup quickfix
+    autocmd!
+    autocmd FileType qf setlocal wrap
+augroup END
