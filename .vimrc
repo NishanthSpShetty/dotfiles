@@ -1,7 +1,7 @@
 " File: .vimrc
 " Author: <Nishanth Shetty> nishanthspshetty@gmail.com
 "
-" How I configure Vim :P
+" How I configure Vim
 "
 
 " Gotta be first
@@ -58,6 +58,8 @@ Plugin 'jez/vim-ispc'
 Plugin 'kchmck/vim-coffee-script'
 
 """ Programming language plugins
+"for go tags , install gotags
+"go get -u github.com/jstemmer/gotags
 Plugin 'fatih/vim-go'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'racer-rust/vim-racer'
@@ -114,6 +116,31 @@ hi clear SignColumn
 
 " ----- Plugin-Specific Settings --------------------------------------
 
+"golang mappings
+" If you need to run the program and be in the output pane, this should help.
+":w<CR>:vsplit <bar> terminal go run %<CR>
+
+function! ReuseVimGoTerm(cmd) abort
+   if has('nvim') 
+    for w in nvim_list_wins()
+        if "goterm" == nvim_buf_get_option(nvim_win_get_buf(w), 'filetype')
+            call nvim_win_close(w, v:true)
+            break
+        endif
+    endfor
+    endif
+    execute a:cmd
+endfunction
+
+let g:go_term_enabled = 1
+let g:go_term_mode = "silent keepalt  vsplit"
+let g:go_def_reuse_buffer = 1
+"Run program in vsplit right pane, focus will remain in the running source file itself
+au FileType go nmap <leader>r :call ReuseVimGoTerm('GoRun')<CR>
+"au FileType go nmap <leader>r  :w<CR>:vsplit <bar> terminal go run %<CR>
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
 " ----- altercation/vim-colors-solarized settings -----
 " Toggle this to "light" for light colorscheme
 set background=dark
@@ -197,7 +224,7 @@ augroup END
 
 " ----- jez/vim-superman settings -----
 " better man page support
-noremap K :SuperMan <cword><CR>
+"noremap K :SuperMan <cword><CR>
 
 
 
@@ -309,6 +336,7 @@ nmap t% :call OpenCurrentAsNewTab()<CR>
 
 nmap td :tabclose<CR>
 nmap tn :tabNext<CR>
+
 
 set splitright
 set splitbelow
