@@ -61,6 +61,8 @@ Plugin 'kchmck/vim-coffee-script'
 "for go tags , install gotags
 "go get -u github.com/jstemmer/gotags
 Plugin 'fatih/vim-go'
+Plugin 'Shougo/neco-vim'
+Plugin 'neoclide/coc-neco'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'racer-rust/vim-racer'
 Plugin 'rust-lang/rust.vim'
@@ -117,9 +119,7 @@ hi clear SignColumn
 " ----- Plugin-Specific Settings --------------------------------------
 
 "golang mappings
-" If you need to run the program and be in the output pane, this should help.
 ":w<CR>:vsplit <bar> terminal go run %<CR>
-
 function! ReuseVimGoTerm(cmd) abort
    if has('nvim') 
     for w in nvim_list_wins()
@@ -135,12 +135,14 @@ endfunction
 let g:go_term_enabled = 1
 let g:go_term_mode = "silent keepalt  vsplit"
 let g:go_def_reuse_buffer = 1
-"Run program in vsplit right pane, focus will remain in the running source file itself
+
 au FileType go nmap <leader>r :call ReuseVimGoTerm('GoRun')<CR>
 "au FileType go nmap <leader>r  :w<CR>:vsplit <bar> terminal go run %<CR>
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <leader>n <Plug>(go-rename)
+
 " ----- altercation/vim-colors-solarized settings -----
 " Toggle this to "light" for light colorscheme
 set background=dark
@@ -226,7 +228,10 @@ augroup END
 " better man page support
 "noremap K :SuperMan <cword><CR>
 
-
+let g:markdown_fenced_languages = [
+      \ 'vim',
+      \ 'help'
+      \]
 
 
 let g:coc_global_extensions = ['coc-solargraph', 'coc-go', 'coc-rust-analyzer']
