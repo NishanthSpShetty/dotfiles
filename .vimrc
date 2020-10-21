@@ -138,8 +138,9 @@ let g:go_def_reuse_buffer = 1
 
 au FileType go nmap <leader>r :call ReuseVimGoTerm('GoRun')<CR>
 "au FileType go nmap <leader>r  :w<CR>:vsplit <bar> terminal go run %<CR>
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>gb <Plug>(go-build)
+au FileType go nmap <leader>gt :call ReuseVimGoTerm('GoTest')<CR>
+"au FileType go nmap <leader>gt <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <leader>n <Plug>(go-rename)
 
