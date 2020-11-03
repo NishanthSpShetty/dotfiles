@@ -1,3 +1,3 @@
 # dotfiles
-Contains my config
+Contains configs I use
 
