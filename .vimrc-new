@@ -31,10 +31,16 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'luochen1990/rainbow'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+Plugin 'preservim/tagbar'
 
+" == that one plugin to add intellisense
 Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 " === Git plugins
@@ -44,6 +50,9 @@ Plugin  'stsewd/fzf-checkout.vim'
 
 " Language plugins
 Plugin 'fatih/vim-go'
+Plugin 'racer-rust/vim-racer'
+Plugin 'rust-lang/rust.vim'
+
 
 call vundle#end()            
 
@@ -92,6 +101,12 @@ no <right> <NOP>
 vno <down> <NOP>
 vno <up> <NOP>
 vno <left> <NOP>
+
+"window command for navigation
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 
 "=================Plugin configs==============
 
@@ -143,11 +158,6 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': [] }
 
 "Fugitive configuration
 noremap <leader>gc :GCheckout<CR>
@@ -158,7 +168,6 @@ noremap <leader>gs :G<CR>
 let g:airline#extensions#hunks#non_zero_only = 1
 
 " === Go/vim-go 
-let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
 augroup quickfix
     autocmd!
     autocmd FileType qf setlocal wrap
@@ -266,5 +275,41 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " to track the coc extension I use
-let g:coc_global_extensions = [ 'coc-go', 'coc-rust-analyzer', 'coc-json', 'coc-solargraph', 'coc-tsserver', 'coc-vimlsp']
+let g:coc_global_extensions = [ 'coc-go', 'coc-rust-analyzer', 'coc-json', 'coc-solargraph', 'coc-tsserver', 'coc-vimlsp', 'coc-python']
 
+" ============== easymotion
+map <Leader> <Plug>(easymotion-prefix)
+
+
+" rainbow
+let g:rainbow_active = 1
+
+"tagbar 
+nmap <F8> :TagbarToggle<CR>
+
+"Rust racer config
+set hidden
+if has('macunix')
+	let g:racer_cmd = "/Users/nishanth/.cargo/bin/racer"
+else
+let g:racer_cmd = "/home/nishanth/.cargo/bin/racer"
+endif
+
+
+let g:racer_experimental_completer = 1
+let g:racer_insert_paren = 1
+augroup Racer
+    autocmd!
+    autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def)
+    autocmd FileType rust nmap <buffer> gs         <Plug>(rust-def-split)
+    autocmd FileType rust nmap <buffer> gx         <Plug>(rust-def-vertical)
+    autocmd FileType rust nmap <buffer> gt         <Plug>(rust-def-tab)
+    autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
+    autocmd FileType rust nmap <buffer> <leader>gD <Plug>(rust-doc-tab)
+augroup END
+" let rust auto format on save
+let g:rustfmt_autosave = 1
+
+let g:LanguageClient_serverCommands = {
+\ 'rust': ['rust-analyzer'],
+\ }
