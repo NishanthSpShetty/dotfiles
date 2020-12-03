@@ -1,0 +1,13 @@
+# copy this to .config/
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+symbol = "❯❯"
+success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+[golang]
+format = "via [🏎💨 $version](bold cyan) "
+
+[time]
+disabled = false
+format = "%Y-%m-%d %H:%M:%S"
+utc_time_offset = "+05:30"
