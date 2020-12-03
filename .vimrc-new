@@ -235,8 +235,16 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
+
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -310,6 +318,6 @@ augroup END
 " let rust auto format on save
 let g:rustfmt_autosave = 1
 
-let g:LanguageClient_serverCommands = {
-\ 'rust': ['rust-analyzer'],
-\ }
+"let g:LanguageClient_serverCommands = {
+"\ 'rust': ['rust-analyzer'],
+"\ }
