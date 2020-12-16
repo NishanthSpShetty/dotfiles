@@ -190,13 +190,12 @@ let g:go_term_enabled = 1
 let g:go_term_mode = "silent keepalt  vsplit"
 let g:go_def_reuse_buffer = 1
 
-au FileType go nmap <leader>r :call ReuseVimGoTerm('GoRun')<CR>
+au FileType go nmap <leader>gr :call ReuseVimGoTerm('GoRun')<CR>
 "au FileType go nmap <leader>r  :w<CR>:vsplit <bar> terminal go run %<CR>
 au FileType go nmap <leader>gb <Plug>(go-build)
 au FileType go nmap <leader>gt :call ReuseVimGoTerm('GoTest')<CR>
 "au FileType go nmap <leader>gt <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
-au FileType go nmap <leader>n <Plug>(go-rename)
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
@@ -315,9 +314,35 @@ augroup Racer
     autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
     autocmd FileType rust nmap <buffer> <leader>gD <Plug>(rust-doc-tab)
 augroup END
+
+function! Redir(cmd)
+	redir => output
+    	silent! execute(a:cmd )
+	redir END
+	let output = split(output, "\n")
+	vnew
+	let w:scratch = 1
+	setlocal buftype=nofile filetype=rust_out bufhidden=wipe nobuflisted noswapfile
+	call setline(1, output)
+	
+endfunction
+
+command! -nargs=1 Redir call Redir(<f-args>)
+
+au FileType rust nmap <silent> <leader>rr  :call Redir('RustRun')<CR><CR>
+
+" Run with :!
+let g:rust_shell_command_runner = '!'
+
+" Run with :terminal
+let g:rust_shell_command_runner = 'terminal'
+
+" Run with :noautocmd new | terminal (useful on Neovim)
+let g:rust_shell_command_runner = 'noautocmd new | terminal'
 " let rust auto format on save
 let g:rustfmt_autosave = 1
 
 "let g:LanguageClient_serverCommands = {
 "\ 'rust': ['rust-analyzer'],
 "\ }
+
