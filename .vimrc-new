@@ -320,11 +320,14 @@ function! Redir(cmd)
     	silent! execute(a:cmd )
 	redir END
 	let output = split(output, "\n")
-	vnew
+	if bufwinnr('rust.out') >0 
+		bdelete rust.out
+	endif
+	vnew rust.out
 	let w:scratch = 1
-	setlocal buftype=nofile filetype=rust_out bufhidden=wipe nobuflisted noswapfile
+	setlocal buftype=nofile filetype=rust_out bufhidden=wipe noswapfile
 	call setline(1, output)
-	
+	wincmd h
 endfunction
 
 command! -nargs=1 Redir call Redir(<f-args>)
