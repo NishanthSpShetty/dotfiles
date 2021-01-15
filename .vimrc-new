@@ -48,11 +48,12 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin  'stsewd/fzf-checkout.vim'
 
+Plugin 'SirVer/ultisnips'
 " Language plugins
 Plugin 'fatih/vim-go'
 Plugin 'racer-rust/vim-racer'
 Plugin 'rust-lang/rust.vim'
-
+Plugin 'rhysd/vim-clang-format'
 
 call vundle#end()            
 
@@ -315,14 +316,19 @@ augroup Racer
     autocmd FileType rust nmap <buffer> <leader>gD <Plug>(rust-doc-tab)
 augroup END
 
+function! CloseRustOutIfOpen()
+	if bufwinnr('rust.out') >0 
+		bdelete rust.out
+	endif
+endfunction
+
+
 function! Redir(cmd)
 	redir => output
     	silent! execute(a:cmd )
 	redir END
+	call CloseRustOutIfOpen()
 	let output = split(output, "\n")
-	if bufwinnr('rust.out') >0 
-		bdelete rust.out
-	endif
 	vnew rust.out
 	let w:scratch = 1
 	setlocal buftype=nofile filetype=rust_out bufhidden=wipe noswapfile
@@ -333,7 +339,10 @@ endfunction
 command! -nargs=1 Redir call Redir(<f-args>)
 
 au FileType rust nmap <silent> <leader>rr  :call Redir('RustRun')<CR><CR>
-
+au FileType rust nmap <silent> <leader>rd  :call CloseRustOutIfOpen()<CR>
+" let cargo  do some magic on source
+au FileType rust nmap <silent> <leader>cr :Cargo run<CR>
+au FileType rust nmap <silent> <leader>cc :Cargo check<CR>
 " Run with :!
 let g:rust_shell_command_runner = '!'
 
@@ -349,3 +358,27 @@ let g:rustfmt_autosave = 1
 "\ 'rust': ['rust-analyzer'],
 "\ }
 
+
+" UtilSnips config
+" remap completion from Tab to F2, dont mess with coc completion
+let g:UltiSnipsExpandTrigger="<F2>"
+
+
+" C- Lang format config
+let g:clang_format#code_style="google" "google, llvm, mozilla, chromium available
+let g:clang_format#style_options = {
+            \ "AccessModifierOffset" : -4,
+            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11",
+	    \ "BreakBeforeBraces" : "Stroustrup"}
+
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" if you install vim-operator-user
+autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+" Toggle auto formatting:
+nmap <Leader>C :ClangFormatAutoToggle<CR>
+autocmd FileType c ClangFormatAutoEnable
