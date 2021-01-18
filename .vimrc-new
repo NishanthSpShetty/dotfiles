@@ -54,6 +54,7 @@ Plugin 'fatih/vim-go'
 Plugin 'racer-rust/vim-racer'
 Plugin 'rust-lang/rust.vim'
 Plugin 'rhysd/vim-clang-format'
+Plugin 'Olical/conjure', {'tag': 'v4.11.0'}
 
 call vundle#end()            
 
