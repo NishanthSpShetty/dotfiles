@@ -14,6 +14,7 @@ set encoding=UTF-8
 "encoding written to file.
 "set filecoding=UTF-8
 
+set termguicolors
 "required for vundle
 filetype off
 
@@ -44,7 +45,7 @@ Plugin 'preservim/tagbar'
 Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 " === Git plugins
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin  'stsewd/fzf-checkout.vim'
 
