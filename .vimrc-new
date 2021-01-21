@@ -42,7 +42,7 @@ Plugin 'xolox/vim-easytags'
 Plugin 'preservim/tagbar'
 
 " == that one plugin to add intellisense
-Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 " === Git plugins
 "Plugin 'airblade/vim-gitgutter'
@@ -56,6 +56,7 @@ Plugin 'racer-rust/vim-racer'
 Plugin 'rust-lang/rust.vim'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'Olical/conjure', {'tag': 'v4.11.0'}
+Plugin 'cespare/vim-toml'
 
 call vundle#end()            
 
@@ -302,21 +303,21 @@ set hidden
 if has('macunix')
 	let g:racer_cmd = "/Users/nishanth/.cargo/bin/racer"
 else
-let g:racer_cmd = "/home/nishanth/.cargo/bin/racer"
+	let g:racer_cmd = "/home/nishanth/.cargo/bin/racer"
 endif
 
 
-let g:racer_experimental_completer = 1
-let g:racer_insert_paren = 1
-augroup Racer
-    autocmd!
-    autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def)
-    autocmd FileType rust nmap <buffer> gs         <Plug>(rust-def-split)
-    autocmd FileType rust nmap <buffer> gx         <Plug>(rust-def-vertical)
-    autocmd FileType rust nmap <buffer> gt         <Plug>(rust-def-tab)
-    autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
-    autocmd FileType rust nmap <buffer> <leader>gD <Plug>(rust-doc-tab)
-augroup END
+""let g:racer_experimental_completer = 1
+"let g:racer_insert_paren = 1
+"augroup Racer
+"    autocmd!
+"    autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def)
+"    autocmd FileType rust nmap <buffer> gs         <Plug>(rust-def-split)
+"    autocmd FileType rust nmap <buffer> gx         <Plug>(rust-def-vertical)
+"    autocmd FileType rust nmap <buffer> gt         <Plug>(rust-def-tab)
+"    autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
+"    autocmd FileType rust nmap <buffer> <leader>gD <Plug>(rust-doc-tab)
+"augroup END
 
 function! CloseRustOutIfOpen()
 	if bufwinnr('rust.out') >0 
@@ -384,3 +385,7 @@ autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
 nmap <Leader>C :ClangFormatAutoToggle<CR>
 autocmd FileType c ClangFormatAutoEnable
+
+" Yaml file config
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
