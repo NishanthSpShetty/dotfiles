@@ -127,7 +127,7 @@ nmap <C-l> <C-w>l
 "Nerdtree mappings
 
 "Open/close NERDTree Tabs with \t
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR> 
 noremap <silent> <leader>nf :NERDTreeFind<CR>
 "To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 1
@@ -171,6 +171,17 @@ noremap <leader>zf :Files<CR>
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+" if hidden is not set, TextEdit might fail.
+set hidden
+" Better display for messages
+set cmdheight=2
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+
 
 
 "Fugitive configuration
@@ -214,20 +225,10 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
-
+let g:go_doc_keywordprg_enabled = 0
+au filetype go nnoremap <silent> U :call <SID>show_documentation()<CR>
 "=====================================================
 "---- COC mappings
-" if hidden is not set, TextEdit might fail.
-set hidden
-" Better display for messages
-set cmdheight=2
-" Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-" always show signcolumns
-set signcolumn=yes
-
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>

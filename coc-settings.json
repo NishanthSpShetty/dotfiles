@@ -24,6 +24,7 @@
         },
         "clang": {
           "extraArgs": [
+            "-std=c++2a",
             "-isystem/usr/local/include",
             "-isystem/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1",
             "-isystem/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include",
@@ -47,5 +48,6 @@
         "Cargo.toml"
       ]
     }
-  }
+  },
+  "coc.source.iced.enable": true
 }
