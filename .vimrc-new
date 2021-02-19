@@ -72,6 +72,7 @@ call vundle#end()
 filetype plugin indent on   
 
 
+
 " --- basic vim settings ---
 set backspace=indent,eol,start
 set ruler
@@ -84,6 +85,7 @@ set mouse=a
 set splitright "vertical splits the buffer to right.
 set splitbelow "split below the current buffer for h split
 syntax on
+ let g:tmux_navigator_disable_when_zoomed = 1
 
 " [[tab config]]
 function! OpenCurrentAsNewTab()
@@ -269,7 +271,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -371,6 +373,7 @@ let g:rustfmt_autosave = 1
 "\ }
 
 
+autocmd CursorHold * silent call CocActionAsync('highlight')
 " UtilSnips config
 " remap completion from Tab to F2, dont mess with coc completion
 let g:UltiSnipsExpandTrigger="<F2>"
@@ -378,12 +381,16 @@ let g:UltiSnipsExpandTrigger="<F2>"
 
 " C- Lang format config
 let g:clang_format#code_style="google" "google, llvm, mozilla, chromium available
+
+"shoud be cpp-11 providing any other format will fail clang-format
 let g:clang_format#style_options = {
             \ "AccessModifierOffset" : -4,
             \ "AllowShortIfStatementsOnASingleLine" : "true",
             \ "AlwaysBreakTemplateDeclarations" : "true",
             \ "Standard" : "C++11",
-	    \ "BreakBeforeBraces" : "Stroustrup"}
+            \ "BreakBeforeBraces" : "Stroustrup"}
+
+let g:syntastic_cpp_compiler_options = ' -std=c++2a'
 
 
 " map to <Leader>cf in C++ code
@@ -393,7 +400,8 @@ autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
 nmap <Leader>C :ClangFormatAutoToggle<CR>
-autocmd FileType c ClangFormatAutoEnable
+autocmd FileType c,cpp ClangFormatAutoEnable
+autocmd FileType asm set ft=nasm
 
 " Yaml file config
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
