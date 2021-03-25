@@ -84,6 +84,7 @@ filetype plugin indent on
 set backspace=indent,eol,start
 set ruler
 set number
+set rnu
 set showcmd
 set incsearch
 set hlsearch
@@ -142,7 +143,7 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
-    enable = true,              -- false will disable the whole extension
+    enable =false,              -- false will disable the whole extension
     disable = {},  -- list of language that will be disabled
   },
 }
@@ -252,7 +253,7 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 " this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
-au filetype go nnoremap <silent> U :call <SID>show_documentation()<CR>
+
 "=====================================================
 "---- COC mappings
 " Use tab for trigger completion with characters ahead and navigate.
@@ -298,7 +299,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use U to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> U :call <SID>show_documentation()<CR>
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
