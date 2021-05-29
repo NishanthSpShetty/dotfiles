@@ -379,6 +379,7 @@ au FileType rust nmap <silent> <leader>rr  :call Redir('RustRun')<CR><CR>
 au FileType rust nmap <silent> <leader>rd  :call CloseRustOutIfOpen()<CR>
 " let cargo  do some magic on source
 au FileType rust nmap <silent> <leader>cr :Cargo run<CR>
+au FileType rust nmap <silent> <leader>ct :Cargo test<CR>
 au FileType rust nmap <silent> <leader>cc :Cargo check<CR>
 " Run with :!
 let g:rust_shell_command_runner = '!'
@@ -463,5 +464,5 @@ lua <<EOF
 EOF
 augroup rustlay
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
-\ lua require'lsp_extensions'.inlay_hints{ prefix = ' ->', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+\ lua require'lsp_extensions'.inlay_hints{ prefix ='➜', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}, only_current_line = true }
 augroup END
