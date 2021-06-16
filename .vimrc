@@ -78,6 +78,13 @@ Plugin 'neovim/nvim-lspconfig'
 Plugin 'nvim-lua/lsp_extensions.nvim'
 
 call vundle#end()            
+
+let g:go_highlight_structs = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
 "turn back filetype plugin and indentation on
 filetype plugin indent on   
 
@@ -455,14 +462,14 @@ autocmd FileType clojure nmap <buffer> <leader>am :IcedAddMissing<cr>
 
 " to get the rust inlay type hints
 
-lua <<EOF
-	local nvim_lsp = require'lspconfig'
-    nvim_lsp.rust_analyzer.setup {
-    --on_attach = on_attach;
-    }
-    
-EOF
-augroup rustlay
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
-\ lua require'lsp_extensions'.inlay_hints{ prefix ='➜', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}, only_current_line = true }
-augroup END
+" lua <<EOF
+" 	local nvim_lsp = require'lspconfig'
+"     nvim_lsp.rust_analyzer.setup {
+"     --on_attach = on_attach;
+"     }
+"     
+" EOF
+" augroup rustlay
+" autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
+" \ lua require'lsp_extensions'.inlay_hints{ prefix ='➜', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}, only_current_line = true }
+" augroup END
