@@ -67,13 +67,30 @@ Plugin 'guns/vim-sexp',    {'for': 'clojure'}
 Plugin 'liquidz/vim-iced', {'for': 'clojure'}
 Plugin 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
 
-Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plugin 'nvim-lua/popup.nvim'
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'nvim-telescope/telescope.nvim'
+Plugin 'puremourning/vimspector'
 
+
+
+Plugin 'neovim/nvim-lspconfig'
+Plugin 'nvim-lua/lsp_extensions.nvim'
 
 call vundle#end()            
+
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls= 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_variable_declarations = 1
+
 "turn back filetype plugin and indentation on
 filetype plugin indent on   
 
@@ -138,17 +155,6 @@ nmap <C-l> <C-w>l
 
 "=================Plugin configs==============
 
-"Tree sitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  highlight = {
-    enable =false,              -- false will disable the whole extension
-    disable = {},  -- list of language that will be disabled
-  },
-}
-EOF
-
 "Nerdtree mappings
 
 "Open/close NERDTree Tabs with \t
@@ -175,12 +181,14 @@ let g:NERDTreeGitStatusShowClean = 1
 
 " Theme config
 "Toggle this to "light" for light colorscheme
-"set background=dark
+let g:gruvbox_contrast_dark = 'hard'
 
 "Uncomment the next line if your terminal is not configured for solarized
 "let g:solarized_termcolors=256
-let g:gruvbox_contrast_dark = 'hard'
+ let g:gruvbox_invert_selection='0'
+ set background=dark
 colorscheme  gruvbox
+
 set laststatus=2
 "Show PASTE if in paste mode
 let g:airline_detect_paste=1
@@ -384,6 +392,7 @@ au FileType rust nmap <silent> <leader>rr  :call Redir('RustRun')<CR><CR>
 au FileType rust nmap <silent> <leader>rd  :call CloseRustOutIfOpen()<CR>
 " let cargo  do some magic on source
 au FileType rust nmap <silent> <leader>cr :Cargo run<CR>
+au FileType rust nmap <silent> <leader>ct :Cargo test<CR>
 au FileType rust nmap <silent> <leader>cc :Cargo check<CR>
 " Run with :!
 let g:rust_shell_command_runner = '!'
@@ -454,3 +463,19 @@ autocmd FileType clojure nmap <buffer> gd    :IcedDefJump<cr>
 " add namespace
 autocmd FileType clojure nmap <buffer> <leader>an :IcedAddNs<cr>
 autocmd FileType clojure nmap <buffer> <leader>am :IcedAddMissing<cr>
+
+
+
+" to get the rust inlay type hints
+
+" lua <<EOF
+" 	local nvim_lsp = require'lspconfig'
+"     nvim_lsp.rust_analyzer.setup {
+"     --on_attach = on_attach;
+"     }
+"     
+" EOF
+" augroup rustlay
+" autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
+" \ lua require'lsp_extensions'.inlay_hints{ prefix ='➜', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}, only_current_line = true }
+" augroup END
