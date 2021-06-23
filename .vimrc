@@ -67,17 +67,14 @@ Plugin 'guns/vim-sexp',    {'for': 'clojure'}
 Plugin 'liquidz/vim-iced', {'for': 'clojure'}
 Plugin 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
 
+Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plugin 'nvim-lua/popup.nvim'
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'nvim-telescope/telescope.nvim'
-Plugin 'puremourning/vimspector'
 
-
-
-Plugin 'neovim/nvim-lspconfig'
-Plugin 'nvim-lua/lsp_extensions.nvim'
 
 call vundle#end()            
+
 
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -91,10 +88,9 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_variable_declarations = 1
 
+
 "turn back filetype plugin and indentation on
 filetype plugin indent on   
-
-
 
 
 " --- basic vim settings ---
@@ -155,6 +151,17 @@ nmap <C-l> <C-w>l
 
 "=================Plugin configs==============
 
+"Tree sitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable =false,              -- false will disable the whole extension
+    disable = {},  -- list of language that will be disabled
+  },
+}
+EOF
+
 "Nerdtree mappings
 
 "Open/close NERDTree Tabs with \t
@@ -179,16 +186,15 @@ let g:NERDTreeGitStatusShowClean = 1
 " ============================================
 
 
+
 " Theme config
 "Toggle this to "light" for light colorscheme
-let g:gruvbox_contrast_dark = 'hard'
+set background=dark
 
 "Uncomment the next line if your terminal is not configured for solarized
 "let g:solarized_termcolors=256
- let g:gruvbox_invert_selection='0'
- set background=dark
+let g:gruvbox_contrast_dark = 'hard'
 colorscheme  gruvbox
-
 set laststatus=2
 "Show PASTE if in paste mode
 let g:airline_detect_paste=1
@@ -221,7 +227,8 @@ set signcolumn=yes
 noremap <leader>gc :GCheckout<CR>
 noremap <leader>gs :G<CR>
 
-let g:python3_host_prog='/Users/nishanth/.pyenv/shims/python3'
+let g:loaded_python_provider = 0
+let g:python3_host_prog='/usr/bin/python3'
 
 " === airblade/vim-gitgutter settings -----
 " In vim-airline, only display "hunks" if the diff is non-zero
@@ -317,6 +324,7 @@ vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>f  :<C-u>CocFix<cr>
 " Manage extensions
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
@@ -333,7 +341,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " to track the coc extension I use
-let g:coc_global_extensions = [ 'coc-go', 'coc-rust-analyzer', 'coc-json', 'coc-solargraph', 'coc-tsserver', 'coc-vimlsp', 'coc-python']
+let g:coc_global_extensions = [ 'coc-go', 'coc-rust-analyzer', 'coc-json', 'coc-solargraph', 'coc-tsserver', 'coc-vimlsp', 'coc-python', 'coc-java']
 
 " ============== easymotion
 map <Leader> <Plug>(easymotion-prefix)
@@ -463,19 +471,3 @@ autocmd FileType clojure nmap <buffer> gd    :IcedDefJump<cr>
 " add namespace
 autocmd FileType clojure nmap <buffer> <leader>an :IcedAddNs<cr>
 autocmd FileType clojure nmap <buffer> <leader>am :IcedAddMissing<cr>
-
-
-
-" to get the rust inlay type hints
-
-" lua <<EOF
-" 	local nvim_lsp = require'lspconfig'
-"     nvim_lsp.rust_analyzer.setup {
-"     --on_attach = on_attach;
-"     }
-"     
-" EOF
-" augroup rustlay
-" autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
-" \ lua require'lsp_extensions'.inlay_hints{ prefix ='➜', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}, only_current_line = true }
-" augroup END

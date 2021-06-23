@@ -95,8 +95,6 @@ let g:go_highlight_variable_declarations = 1
 filetype plugin indent on   
 
 
-
-
 " --- basic vim settings ---
 set backspace=indent,eol,start
 set ruler
