@@ -1,18 +1,21 @@
+export LC_ALL=en_IN.UTF-8
+export LANG=en_IN.UTF-8
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/nishanth/.oh-my-zsh"
+export ZSH="/home/nishanth/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+#ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -33,7 +36,7 @@ export ZSH="/Users/nishanth/.oh-my-zsh"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -42,9 +45,11 @@ export ZSH="/Users/nishanth/.oh-my-zsh"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
  COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -64,15 +69,14 @@ ENABLE_CORRECTION="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git
 	zsh-syntax-highlighting
 	zsh-autosuggestions
-	)
-
+    )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,61 +105,29 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
 
 function set_path(){
-    if [[ -d $1 ]]
-    then
-        export PATH=$1:$PATH
-    fi
+if [[ -d $1 ]];
+then
+ export PATH=$1:$PATH
+fi
 }
 
+set_path "/home/nishanth/installs/nvim-linux64/bin"
+set_path "/home/nishanth/.local/bin"
+set_path "/home/nishanth/go/bin"
 
-set_path "/Users/nishanth/bin"
-set_path "/Users/nishanth/Downloads/Visual Studio Code.app/Contents/Resources/app/bin"
-set_path "/Users/nishanth/Applications/bin"
-set_path "/Applications/MacVim.app/Contents/bin"
-set_path "/usr/local/opt/ruby/bin"
-set_path "/Users/nishanth/.rbenv/shims"
-set_path "/Applications/IntelliJ IDEA.app/Contents/MacOS"
-set_path "/Users/nishanth/.local/bin"
-set_path "/Users/nishanth/.vim/bundle/vim-iced/bin"
-set_path "/Users/nishanth/Applications/apache-maven-3.6.3/bin"
-set_path "/Users/nishanth/.nimble/bin"
-set_path "$(pyenv root)/shims"
-set_path "/Users/nishanth/Applications/nvim-osx64/bin"
-set_path "/usr/local/opt/openjdk/bin"
 
-export JAVA8="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin"
-export RUST_SRC_PATH="/Users/nishanth/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"
 
-alias ll="ls -l"
-alias vc=lazy-connect
-alias ctags="`brew --prefix`/bin/ctags"
-alias rsh="exec $SHELL"
-alias v="nvim"
-alias vim="nvim"
-alias vi="nvim"
+alias vi=nvim
+alias vim=nvim
+source $HOME/.cargo/env
 
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-alias k=kubectl # The next line enables shell command completion for gcloud.
 
-if [ -f '/Users/nishanth/google-cloud-sdk/completion.zsh.inc' ]; then 
-    . '/Users/nishanth/google-cloud-sdk/completion.zsh.inc';
-fi
-
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
 eval "$(starship init zsh)"
-# opam configuration
-test -r /Users/nishanth/.opam/opam-init/init.zsh && . /Users/nishanth/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/nishanth/Downloads/google-cloud-sdk/path.zsh.inc' ];
-then 
-    . '/Users/nishanth/Downloads/google-cloud-sdk/path.zsh.inc';
-fi
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/nishanth/Downloads/google-cloud-sdk/completion.zsh.inc' ];
-then 
-    . '/Users/nishanth/Downloads/google-cloud-sdk/completion.zsh.inc';
-fi
