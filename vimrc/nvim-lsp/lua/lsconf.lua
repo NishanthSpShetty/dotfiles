@@ -127,15 +127,23 @@ function goimports(timeoutms)
     local actions = result[1].result
     if not actions then return end
     local action = actions[1]
+    
+    -- get offset encoding from client
 
+    local offset_encoding = 'utf-8'
+    for _, c in pairs(vim.lsp.buf_get_clients()) do
+        if c['name']== 'gopls' then
+            offset_encoding = c['offset_encoding']
+        end
+    end
     -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
     -- is a CodeAction, it can have either an edit, a command or both. Edits
     -- should be executed first.
     if action.edit or type(action.command) == "table" then
       if action.edit then
-        vim.lsp.util.apply_workspace_edit(action.edit)
+        vim.lsp.util.apply_workspace_edit(action.edit,offset_encoding)
       end
-      if type(action.command) == "table" then
+      if action.command or type(action.command) == "table" then
         vim.lsp.buf.execute_command(action.command)
       end
     else
@@ -143,3 +151,16 @@ function goimports(timeoutms)
     end
 end
     
+
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end

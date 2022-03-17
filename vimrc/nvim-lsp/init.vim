@@ -328,6 +328,6 @@ lua require("lsconf")
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
 \ lua require'lsp_extensions'.inlay_hints{ prefix = ' ->', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua goimports(1000)
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 
