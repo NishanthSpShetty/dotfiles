@@ -44,6 +44,7 @@ Plugin 'luochen1990/rainbow'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 Plugin 'preservim/tagbar'
+Plugin 'tpope/vim-obsession' 
 
 " == that one plugin to add intellisense
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
@@ -71,6 +72,7 @@ Plugin 'nvim-lua/popup.nvim'
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'nvim-telescope/telescope.nvim'
 Plugin 'puremourning/vimspector'
+
 
 
 
@@ -219,7 +221,7 @@ set signcolumn=yes
 noremap <leader>gc :GCheckout<CR>
 noremap <leader>gs :G<CR>
 
-let g:python3_host_prog='/Users/nishanth/.pyenv/shims/python3'
+"let g:python3_host_prog='/Users/nishanth/.pyenv/shims/python3'
 
 " === airblade/vim-gitgutter settings -----
 " In vim-airline, only display "hunks" if the diff is non-zero
