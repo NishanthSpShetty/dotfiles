@@ -24,9 +24,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+ -- buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.open_float(0, {scope="line"})<CR>', opts)
+  -- buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.open_float(0, {focus=false})<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   -- Set some keybinds conditional on server capabilities
@@ -35,6 +36,7 @@ local on_attach = function(client, bufnr)
   elseif client.resolved_capabilities.document_range_formatting then
      buf_set_keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
+
 
 end
 
@@ -51,6 +53,16 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+	vim.lsp.diagnostic.on_publish_diagnostics, {
+		virtual_text =true,
+		underline = true,
+		signs = true,
+	}
+)
+-- on hover show any line diagnostics
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 local servers = { "pyright", "rust_analyzer", "tsserver" , "gopls"}
 for _, lsp in ipairs(servers) do
@@ -140,12 +152,15 @@ function goimports(timeoutms)
     -- is a CodeAction, it can have either an edit, a command or both. Edits
     -- should be executed first.
     if action.edit or type(action.command) == "table" then
+        -- apply organise imports edits
       if action.edit then
         vim.lsp.util.apply_workspace_edit(action.edit,offset_encoding)
       end
-      if action.command or type(action.command) == "table" then
-        vim.lsp.buf.execute_command(action.command)
-      end
+      --  skip fixes for now
+      --  print(dump(action.command))
+      --if action.command or type(action.command) == "table" then
+      --  vim.lsp.buf.execute_command(action.command)
+      --end
     else
       vim.lsp.buf.execute_command(action)
     end
