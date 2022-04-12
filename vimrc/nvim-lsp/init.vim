@@ -45,6 +45,7 @@ Plugin 'xolox/vim-easytags'
 Plugin 'preservim/tagbar'
 Plugin 'tpope/vim-obsession' 
 Plugin 'rhysd/vim-clang-format'
+Plugin 'fatih/vim-go'
 
 " == that one plugin to add intellisense
 
@@ -60,19 +61,21 @@ Plugin 'hrsh7th/cmp-nvim-lsp'
 Plugin 'saadparwaiz1/cmp_luasnip'
 Plugin  'L3MON4D3/LuaSnip'
 
+Plugin 'puremourning/vimspector'
+
 call vundle#end()            
 
-"let g:go_highlight_build_constraints = 1
-"let g:go_highlight_extra_types = 1
-"let g:go_highlight_fields = 1
-"let g:go_highlight_functions = 1
-"let g:go_highlight_function_calls= 1
-"let g:go_highlight_methods = 1
-"let g:go_highlight_operators = 1
-"let g:go_highlight_structs = 1
-"let g:go_highlight_fields = 1
-"let g:go_highlight_types = 1
-"let g:go_highlight_variable_declarations = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls= 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_variable_declarations = 1
 
 "turn back filetype plugin and indentation on
 filetype plugin indent on   
@@ -230,7 +233,7 @@ endfunction
 "let g:go_term_enabled = 1
 "let g:go_term_mode = "silent keepalt  vsplit"
 "let g:go_def_reuse_buffer = 1
-"let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goimports"
 
 au FileType go nmap <leader>gr :call ReuseVimGoTerm('GoRun')<CR>
 "au FileType go nmap <leader>r  :w<CR>:vsplit <bar> terminal go run %<CR>
@@ -306,8 +309,8 @@ let g:syntastic_cpp_compiler_options = ' -std=c++2a'
 
 
 " map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc,proto nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc,proto vnoremap <buffer><Leader>cf :ClangFormat<CR>
+autocmd FileType c,cpp,objc,proto,json nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc,proto,json vnoremap <buffer><Leader>cf :ClangFormat<CR>
 " if you install vim-operator-user
 autocmd FileType c,cpp,objc,proto map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
@@ -328,6 +331,26 @@ lua require("lsconf")
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
 \ lua require'lsp_extensions'.inlay_hints{ prefix = ' ->', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
-autocmd BufWritePre *.go lua goimports(1000)
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+"autocmd BufWritePre *.go lua goimports(1000)
+"autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 
+
+
+"viminspector 
+let g:vimspector_enable_mappings = 'HUMAN'
+nmap <F5> <Plug>VimspectorContinue
+
+nmap <leader>vl :call vimspector#Launch()<CR>
+nmap <leader>vr :VimspectorReset<CR>
+nmap <leader>ve :VimspectorEval
+nmap <leader>vw :VimspectorWatch
+nmap <leader>vo :VimspectorShowOutput
+nmap <leader>vi <Plug>VimspectorBalloonEval
+xmap <leader>vi <Plug>VimspectorBalloonEval
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-go', 'CodeLLDB', 'vscode-node-debug2' ]
