@@ -1,8 +1,6 @@
-"vimrc/nvim init config
+" nvim config with lsp support
+"
 " Author : <Nishanth Shetty> nishanthspshetty@gmail.com
-" 
-" Should work on both mac and linux environment.
-
 "This is optional if have .vimrc in your path or VIMINIT set (default).
 "If you are loading this in vim with -u flag, uncomment this line to set the
 "following flag,
@@ -61,6 +59,8 @@ Plugin 'hrsh7th/cmp-nvim-lsp'
 Plugin 'saadparwaiz1/cmp_luasnip'
 Plugin  'L3MON4D3/LuaSnip'
 
+Plugin 'nvim-lua/plenary.nvim'
+Plugin 'nishanthspshetty/renamer.nvim' , { 'branch': 'develop' }
 Plugin 'puremourning/vimspector'
 
 call vundle#end()            
