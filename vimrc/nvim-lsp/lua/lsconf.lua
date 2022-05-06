@@ -65,6 +65,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- on hover show any line diagnostics
 vim.o.updatetime = 250
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }]]
 
 local servers = { "pyright", "rust_analyzer", "tsserver" , "gopls"}
 for _, lsp in ipairs(servers) do
