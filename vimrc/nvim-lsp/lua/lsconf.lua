@@ -12,6 +12,7 @@ local on_attach = function(client, bufnr)
    
   require('renamer').setup()
 
+
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -31,10 +32,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-     buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+     buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
   elseif client.resolved_capabilities.document_range_formatting then
      buf_set_keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
@@ -42,11 +43,15 @@ local on_attach = function(client, bufnr)
 
 end
 
+require('rust-tools').setup({},  on_attach)
 -- add capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+
+
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
     'documentation',
@@ -66,14 +71,22 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 vim.o.updatetime = 250
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 vim.cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }]]
+vim.cmd [[autocmd BufWritePost * lua vim.lsp.buf.format { async = true }]]
 
-local servers = { "pyright", "rust_analyzer", "tsserver" , "gopls"}
+
+local servers = { "pyright", 
+            --     "rust_analyzer", 
+                  "tsserver" ,
+                  "gopls"}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach;
     capabilities = capabilities;
   }
 end
+
+
+
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)

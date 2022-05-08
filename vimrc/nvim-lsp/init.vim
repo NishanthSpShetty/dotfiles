@@ -60,8 +60,10 @@ Plugin 'saadparwaiz1/cmp_luasnip'
 Plugin  'L3MON4D3/LuaSnip'
 
 Plugin 'nvim-lua/plenary.nvim'
-Plugin 'nishanthspshetty/renamer.nvim' , { 'branch': 'develop' }
 Plugin 'puremourning/vimspector'
+
+Plugin 'nishanthspshetty/renamer.nvim' , { 'branch': 'develop' }
+Plugin 'nishanthspshetty/rust-tools.nvim'
 
 call vundle#end()            
 
@@ -82,6 +84,10 @@ filetype plugin indent on
 
 
 " --- basic vim settings ---
+
+"source curret vimrc without restart
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+
 set backspace=indent,eol,start
 set ruler
 set number
@@ -284,16 +290,6 @@ au FileType rust nmap <silent> <leader>rd  :call CloseRustOutIfOpen()<CR>
 au FileType rust nmap <silent> <leader>cr :Cargo run<CR>
 au FileType rust nmap <silent> <leader>ct :Cargo test<CR>
 au FileType rust nmap <silent> <leader>cc :Cargo check<CR>
-" Run with :!
-let g:rust_shell_command_runner = '!'
-
-" Run with :terminal
-let g:rust_shell_command_runner = 'terminal'
-
-" Run with :noautocmd new | terminal (useful on Neovim)
-let g:rust_shell_command_runner = 'noautocmd new | terminal'
-" let rust auto format on save
-let g:rustfmt_autosave = 1
 
 let g:clang_format#code_style="google" "google, llvm, mozilla, chromium available
 
@@ -327,9 +323,6 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 
 lua require("lsconf")
-
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
-\ lua require'lsp_extensions'.inlay_hints{ prefix = ' ->', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 "autocmd BufWritePre *.go lua goimports(1000)
 "autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
