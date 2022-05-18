@@ -78,10 +78,10 @@ font:
 
   # The bold font face
   bold:
-    family: Iosevka
-    style: Medium
+    # family: Iosevka
+    style: "Light Oblique" #Medium
     # family: "Fira Code"
-    # family: "Source Code Pro"
+    family: Monospace # "Source Code Pro"
 
   # The italic font face
   italic:
