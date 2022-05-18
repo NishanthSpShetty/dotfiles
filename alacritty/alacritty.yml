@@ -40,7 +40,7 @@ window:
   # - none: neither borders nor title bar
   # - transparent: title bar, transparent background and title bar buttons
   # - buttonless: title bar, transparent background, but no title bar buttons
-  decorations: none
+  decorations: full
 
   # Startup Mode (changes require restart)
   #
@@ -51,7 +51,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Windowed
+  startup_mode: Maximized
 
   # Background opacity
   opacity: 1.0
@@ -495,7 +495,7 @@ debug:
 # Entries in shell.args are passed unmodified as arguments to the shell.
 shell:
   program: /usr/bin/zsh
-  args:
-    - --command=tmux
+    #args:
+    #- --command=tmux
 
 # vim: nospell
