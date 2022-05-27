@@ -32,16 +32,25 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-     buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
+     buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
   elseif client.resolved_capabilities.document_range_formatting then
      buf_set_keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 
 
 end
+
+require('nvim-tree').setup{
+    open_on_setup = true,
+    view = {
+        side = "left",
+        width = 30,
+        auto_resize = true
+    }
+}
 
 require('rust-tools').setup({},  on_attach)
 -- add capabilities
@@ -71,7 +80,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 vim.o.updatetime = 250
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 vim.cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }]]
-vim.cmd [[autocmd BufWritePost * lua vim.lsp.buf.format { async = true }]]
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 
 
 local servers = { "pyright", 

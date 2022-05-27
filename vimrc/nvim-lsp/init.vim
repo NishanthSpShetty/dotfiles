@@ -34,8 +34,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'scrooloose/nerdtree'
+"lugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'luochen1990/rainbow'
 Plugin 'xolox/vim-misc'
@@ -44,6 +44,9 @@ Plugin 'preservim/tagbar'
 Plugin 'tpope/vim-obsession' 
 Plugin 'rhysd/vim-clang-format'
 Plugin 'fatih/vim-go'
+" requires
+Plugin 'kyazdani42/nvim-web-devicons' " for file icons
+Plugin 'kyazdani42/nvim-tree.lua'
 
 " == that one plugin to add intellisense
 
@@ -147,26 +150,35 @@ nmap <C-l> <C-w>l
 
 "Nerdtree mappings
 
-"Open/close NERDTree Tabs with \t
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR> 
-noremap <silent> <leader>nf :NERDTreeFind<CR>
-"To have NERDTree always open on startup
-let g:nerdtree_tabs_open_on_console_startup = 1
-
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-		\ }
-let g:NERDTreeGitStatusShowClean = 1
+""Open/close NERDTree Tabs with \t
+"nmap <silent> <leader>t :NERDTreeTabsToggle<CR> 
+"noremap <silent> <leader>nf :NERDTreeFind<CR>
+""To have NERDTree always open on startup
+"let g:nerdtree_tabs_open_on_console_startup = 1
+"
+"let g:NERDTreeGitStatusIndicatorMapCustom = {
+"                \ 'Modified'  :'✹',
+"                \ 'Staged'    :'✚',
+"                \ 'Untracked' :'✭',
+"                \ 'Renamed'   :'➜',
+"                \ 'Unmerged'  :'═',
+"                \ 'Deleted'   :'✖',
+"                \ 'Dirty'     :'✗',
+"                \ 'Ignored'   :'☒',
+"                \ 'Clean'     :'✔︎',
+"                \ 'Unknown'   :'?',
+"		\ }
+"let g:NERDTreeGitStatusShowClean = 1
+"" Start NERDTree. If a file is specified, move the cursor to its window.
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 " ============================================
+"
+" vim-tree config
+nnoremap <silent> <leader>t :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>nf :NvimTreeFindFile<CR>
+
 
 
 " Theme config
