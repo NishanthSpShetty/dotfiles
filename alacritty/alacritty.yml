@@ -73,19 +73,23 @@ font:
     #family: Iosevka
     # style: Light
     # family: "Fira Code"
-    family: "Monospace"
-    style: "Light Oblique" 
+    #family: "agave Nerd Font"
+    family: "Hack Nerd Font"
+    style: "Regular" #"Light Oblique" 
 
   # The bold font face
   bold:
     # family: Iosevka
-    style: "Light Oblique" #Medium
+    #style: "Light Oblique" #Medium
     # family: "Fira Code"
-    family: Monospace # "Source Code Pro"
+    #family: Monospace # "Source Code Pro"
+    family: "agave Nerd Font"
+    style: "Bold" #"Light Oblique" 
 
   # The italic font face
   italic:
-    family: Iosevka
+    #family: Iosevka
+    family: "agave Nerd Font"
     style: "Light Italic"
     # style: "Light Oblique"
     # family: "Fira Code"
@@ -93,7 +97,7 @@ font:
     # style: "Medium Italic"
 
   # Point size of the font
-  size: 8.0
+  size: 9.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
