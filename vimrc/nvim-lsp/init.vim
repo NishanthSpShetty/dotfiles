@@ -59,14 +59,15 @@ Plugin 'neovim/nvim-lspconfig'
 Plugin 'nvim-lua/lsp_extensions.nvim'
 Plugin 'hrsh7th/nvim-cmp' 
 Plugin 'hrsh7th/cmp-nvim-lsp'
-Plugin 'saadparwaiz1/cmp_luasnip'
+"Plugin 'saadparwaiz1/cmp_luasnip'
 Plugin  'L3MON4D3/LuaSnip'
+Plugin 'rafamadriz/friendly-snippets'
 
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'puremourning/vimspector'
 
 Plugin 'nishanthspshetty/renamer.nvim' , { 'branch': 'develop' }
-Plugin 'nishanthspshetty/rust-tools.nvim'
+Plugin 'simrat39/rust-tools.nvim'
 
 call vundle#end()            
 
