@@ -74,7 +74,7 @@ font:
     # style: Light
     # family: "Fira Code"
     #family: "agave Nerd Font"
-    family: "Hack Nerd Font"
+    family: "Monospace"
     style: "Regular" #"Light Oblique" 
 
   # The bold font face
@@ -83,13 +83,13 @@ font:
     #style: "Light Oblique" #Medium
     # family: "Fira Code"
     #family: Monospace # "Source Code Pro"
-    family: "agave Nerd Font"
+    family: "Hack Nerd Font"
     style: "Bold" #"Light Oblique" 
 
   # The italic font face
   italic:
     #family: Iosevka
-    family: "agave Nerd Font"
+    family: "Hack Nerd Font"
     style: "Light Italic"
     # style: "Light Oblique"
     # family: "Fira Code"

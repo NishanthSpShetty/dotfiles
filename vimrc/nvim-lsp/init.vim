@@ -273,7 +273,7 @@ let g:go_doc_keywordprg_enabled = 0
 let g:rainbow_active = 1
 
 "tagbar 
-nmap <F8> :TagbarToggle<CR>
+nmap <space>t :TagbarToggle<CR>
 
 function! CloseRustOutIfOpen()
 	if bufwinnr('rust.out') >0 
