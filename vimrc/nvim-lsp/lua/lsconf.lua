@@ -47,9 +47,11 @@ require('nvim-tree').setup{
     open_on_setup = true,
     view = {
         side = "left",
-        width = 25,
+        width = 30,
         auto_resize = true
-    }
+
+    },
+    auto_close = true
 }
 
 require('luasnp')
@@ -85,6 +87,7 @@ vim.o.updatetime = 250
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 vim.cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }]]
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
 
 
 local servers = { "pyright", 

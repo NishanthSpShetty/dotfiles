@@ -4,7 +4,7 @@
 "This is optional if have .vimrc in your path or VIMINIT set (default).
 "If you are loading this in vim with -u flag, uncomment this line to set the
 "following flag,
-set nocompatible
+"not required for neovim -- set nocompatible
 
 "encoding displayed.
 set encoding=UTF-8
@@ -217,6 +217,9 @@ set updatetime=300
 set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
+
+"set list
+"set listchars=tab:▸\ ,eol:¬
 
 
 
