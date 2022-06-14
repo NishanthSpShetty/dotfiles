@@ -50,8 +50,7 @@ require('nvim-tree').setup{
         width = 30,
         auto_resize = true
 
-    },
-    auto_close = true
+    }
 }
 
 require('luasnp')
