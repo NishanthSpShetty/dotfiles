@@ -17,6 +17,7 @@ set termguicolors
 set tabstop=4
 set expandtab
 set shiftwidth=4
+set spell spelllang=en_us
 "required for vundle
 filetype off
 
@@ -202,6 +203,8 @@ let g:airline_theme='gruvbox'
 
 " FZF fuzzy finder mapping
 noremap <leader>zf :Files<CR>
+noremap <silent><C-f> :Files<CR>
+noremap <silent><space>l :Lines<CR>
 
 "Syntastic configuration
 set statusline+=%#warningmsg#
