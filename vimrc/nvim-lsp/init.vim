@@ -35,12 +35,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'scrooloose/nerdtree'
-"lugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-syntastic/syntastic'
-Plugin 'luochen1990/rainbow'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
 Plugin 'preservim/tagbar'
 Plugin 'tpope/vim-obsession' 
 Plugin 'rhysd/vim-clang-format'
@@ -56,11 +51,19 @@ Plugin 'kyazdani42/nvim-tree.lua'
 Plugin 'tpope/vim-fugitive'
 Plugin  'stsewd/fzf-checkout.vim'
 
+Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plugin 'neovim/nvim-lspconfig'
 Plugin 'nvim-lua/lsp_extensions.nvim'
+
+" completion plugins
 Plugin 'hrsh7th/nvim-cmp' 
-Plugin 'hrsh7th/cmp-nvim-lsp'
-"Plugin 'saadparwaiz1/cmp_luasnip'
+Plugin 'hrsh7th/cmp-buffer' 
+Plugin 'hrsh7th/cmp-path' 
+Plugin 'hrsh7th/cmp-cmdline' 
+Plugin 'hrsh7th/cmp-nvim-lsp' 
+Plugin 'saadparwaiz1/cmp_luasnip'
+" snippets
 Plugin  'L3MON4D3/LuaSnip'
 Plugin 'rafamadriz/friendly-snippets'
 
@@ -70,19 +73,9 @@ Plugin 'puremourning/vimspector'
 Plugin 'nishanthspshetty/renamer.nvim' , { 'branch': 'develop' }
 Plugin 'simrat39/rust-tools.nvim'
 
-call vundle#end()            
+Plugin 'mhartington/formatter.nvim'
 
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls= 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_variable_declarations = 1
+call vundle#end()            
 
 "turn back filetype plugin and indentation on
 filetype plugin indent on   
@@ -337,15 +330,15 @@ autocmd FileType asm set ft=nasm
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 
-" neovim lsp settings
+" neovim lua config import
 " 
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.lua FormatWrite
+augroup END
 
 
-lua require("lsconf")
-
-"autocmd BufWritePre *.go lua goimports(1000)
-"autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-
+lua require("init")
 
 
 "viminspector 
