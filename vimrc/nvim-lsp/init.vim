@@ -17,7 +17,8 @@ set termguicolors
 set tabstop=4
 set expandtab
 set shiftwidth=4
-set spell spelllang=en_us
+"set spell spelllang=en_us
+
 "required for vundle
 filetype off
 
@@ -89,7 +90,7 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>
 set backspace=indent,eol,start
 set ruler
 set number
-set rnu
+" relative number set rnu
 set showcmd
 set incsearch
 set hlsearch
