@@ -10,9 +10,10 @@ RED='\033[0;31m'
 mkdir -p ~/.config/alacritty/ ~/installs/bin/
 
 cp ../starship.toml ~/.config/
-cp ../.zshrc ~
 cp ../alacritty/alacritty.yml ~/.config/alacritty/
 cp -r ../vimrc/nvim-lsp/ ~/.config/nvim/
+
+DOT_PATH=${PWD}
 
 cd
 sudo apt update
@@ -24,6 +25,9 @@ echo -e "${GREEN}installing zsh${NC}"
 sudo apt install -yq zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+# copy zshrc 
+
+cp ${DOT_PATH}/../.zshrc ~/
 # setup tmux 
 
 echo -e "${GREEN}installing tmux${NC}"
