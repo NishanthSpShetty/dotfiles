@@ -6,8 +6,8 @@
 mkdir -p ~/.config/alacritty/ ~/installs/bin/
 
 cp ../starship.toml ~/.config/
-cp ../zshrc ~
-cp ../alacritty/alacritty.yml ~/.config/
+cp ../.zshrc ~
+cp ../alacritty/alacritty.yml ~/.config/alacritty/
 cp -r ../vimrc/nvim-lsp/ ~/.config/nvim/
 
 cd
@@ -18,7 +18,7 @@ sudo apt install -yq git
 # setup oh my zsh
 echo "installing zsh"
 sudo apt install -yq zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # setup tmux 
 
@@ -56,6 +56,8 @@ sudo apt install -yq golang
 
 echo "installing rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+echo "installing starship"
+curl -sS https://starship.rs/install.sh | sh -s -- -y
 # docker
 echo "installing docker"
 sudo apt install -yq \
