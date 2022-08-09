@@ -116,11 +116,15 @@ fi
 set_path "/home/nishanth/installs/nvim-linux64/bin"
 set_path "/home/nishanth/.local/bin"
 set_path "/home/nishanth/go/bin"
+set_path "/home/nishanth/installs/go/bin"
+set_path "/home/nishanth/installs/android-studio/bin"
 
 
 
 alias vi=nvim
 alias vim=nvim
+alias ls=exa
+alias cat=bat
 source $HOME/.cargo/env
 
 
@@ -131,3 +135,4 @@ eval "$(starship init zsh)"
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+# set_path "/home/nishanth/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin"
