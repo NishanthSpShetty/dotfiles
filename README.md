@@ -19,13 +19,9 @@
 
 Download the dotfile as zip or clone if you have git already installed
 
-
 ```
 curl -L -O https://github.com/NishanthSpShetty/dotfiles/archive/refs/heads/master.zip
-```
-#### Unzip and run the init.sh as follows
 
-```
 unzip master.zip
 cd dotfiles-master/setups/
 ./init.sh
