@@ -2,7 +2,6 @@
 # initialise the new system
 
 
-cd
 
 mkdir -p ~/.config/alacritty/ ~/installs/bin/
 
@@ -11,6 +10,7 @@ cp ../zshrc ~
 cp ../alacritty/alacritty.yml ~/.config/
 cp -r ../vimrc/nvim-lsp/ ~/.config/nvim/
 
+cd
 sudo apt update
 echo "installing git"
 sudo apt install -yq git
