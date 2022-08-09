@@ -10,5 +10,5 @@ echo -e "${BLUE}extracting tar${NC}"
 sudo tar -xzf /tmp/nvim-linux64.tar.gz -C /tmp/
 
 echo -e "${BLUE}copying binary${NC}"
-sudo cp -rf /tmp/nvim-linux64/ /home/nishanth/installs/
+sudo cp -rf /tmp/nvim-linux64/ $HOME/installs/
 echo -e "${BLUE}done${NC}"
