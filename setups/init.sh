@@ -7,6 +7,8 @@ RED='\033[0;31m'
 
 
 DOT_PATH=${PWD}
+exit
+
 
 mkdir -p ~/.config/alacritty/ ~/installs/bin/
 
@@ -54,7 +56,7 @@ sudo apt -qq install -yq alacritty
 
 # install nvim 
 echo -e "${GREEN}installing nvim...${NC}"
-bash ./get_nvim.sh
+bash ${DOT_PATH}/get_nvim.sh
 # install vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
