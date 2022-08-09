@@ -1,8 +1,8 @@
 # run this with whatever shell you have, should work for all, (at least with bash or sh)
 # initialise the new system
 
-GREEN='\033[0;33m'
-RED='\033[0;32m'
+GREEN='\033[0;32m'
+RED='\033[0;31m'
 
 
 
