@@ -1,6 +1,9 @@
 # run this with whatever shell you have, should work for all, (at least with bash or sh)
 # initialise the new system
 
+GREEN='\033[0;33m'
+RED='\033[0;32m'
+
 
 
 mkdir -p ~/.config/alacritty/ ~/installs/bin/
@@ -12,24 +15,24 @@ cp -r ../vimrc/nvim-lsp/ ~/.config/nvim/
 
 cd
 sudo apt update
-echo "installing git"
+echo "${GREEN}installing git"
 sudo apt install -yq git
 
 # setup oh my zsh
-echo "installing zsh"
+echo "${GREEN}installing zsh"
 sudo apt install -yq zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # setup tmux 
 
-echo "installing tmux"
+echo "${GREEN}installing tmux"
 sudo apt install -yq tmux
 git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
 cp .tmux/.tmux.conf.local .
 
 # add continuum and resurrect to tmux (save and resume session)
-echo "installing tmux plugins"
+echo "${GREEN}installing tmux plugins"
 git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux/tmux-resurrect/
 git clone https://github.com/tmux-plugins/tmux-continuum ~/.tmux/tmux-continuum/
 echo <<EOF >> .tmux/.tmux.conf  
@@ -40,26 +43,26 @@ set -g @continuum-restore 'on'
 EOF
 
 ## install alacritty
-echo "installing alacritty"
+echo "${GREEN}installing alacritty"
 sudo add-apt-repository ppa:mmstick76/alacritty
 sudo apt install -yq alacritty
 
 # install nvim 
-echo "installing nvim..."
+echo "${GREEN}installing nvim..."
 bash get_nvim.sh
 # install vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # required tools 
-echo "installing golang"
+echo "${GREEN}installing golang"
 sudo apt install -yq golang 
 
-echo "installing rust"
+echo "${GREEN}installing rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-echo "installing starship"
+echo "${GREEN}installing starship"
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 # docker
-echo "installing docker"
+echo "${GREEN}installing docker"
 sudo apt install -yq \
     ca-certificates \
     curl \
@@ -75,7 +78,9 @@ echo \
 
 sudo apt update && sudo apt get install -yq docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-echo "installing nerd fonts"
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip
+echo "${GREEN}installing nerd fonts"
+curl -L -O https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip
 unzip Agave.zip -d ~/.local/share/fonts/
 fc-cache -fv
+
+echo "${RED} Setup completed, hack away"
