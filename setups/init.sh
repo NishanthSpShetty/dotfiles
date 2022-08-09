@@ -7,8 +7,6 @@ RED='\033[0;31m'
 
 
 DOT_PATH=${PWD}
-exit
-
 
 mkdir -p ~/.config/alacritty/ ~/installs/bin/
 
