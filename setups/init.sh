@@ -6,6 +6,7 @@ NC='\033[0m'
 RED='\033[0;31m'
 
 
+DOT_PATH=${PWD}
 
 mkdir -p ~/.config/alacritty/ ~/installs/bin/
 
@@ -13,7 +14,6 @@ cp ../starship.toml ~/.config/
 cp ../alacritty/alacritty.yml ~/.config/alacritty/
 cp -r ../vimrc/nvim-lsp/ ~/.config/nvim/
 
-DOT_PATH=${PWD}
 
 cd
 sudo apt -qq update
