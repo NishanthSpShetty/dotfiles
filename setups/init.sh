@@ -10,6 +10,8 @@ cp ../starship.toml ~/.config/
 cp ../zshrc ~
 cp ../alacritty/alacritty.yml ~/.config/
 cp -r ../vimrc/nvim-lsp/ ~/.config/nvim/
+
+sudo apt update
 echo "installing git"
 sudo apt install -yq git
 
