@@ -60,4 +60,7 @@ echo \
 
 sudo apt update && sudo apt get install -yq docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-
+# install fonts 
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip
+unzip Agave.zip -d ~/.local/share/fonts/
+fc-cache -fv
