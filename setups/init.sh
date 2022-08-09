@@ -16,13 +16,13 @@ cp -r ../vimrc/nvim-lsp/ ~/.config/nvim/
 DOT_PATH=${PWD}
 
 cd
-sudo apt update
+sudo apt -qq update
 echo -e "${GREEN}installing git ${NC}"
-sudo apt install -yq git
+sudo apt -qq install -yq git
 
 # setup oh my zsh
 echo -e "${GREEN}installing zsh${NC}"
-sudo apt install -yq zsh
+sudo apt -qq install -yq zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # copy zshrc 
@@ -31,7 +31,7 @@ cp ${DOT_PATH}/../.zshrc ~/
 # setup tmux 
 
 echo -e "${GREEN}installing tmux${NC}"
-sudo apt install -yq tmux
+sudo apt -qq install -yq tmux
 git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
 cp .tmux/.tmux.conf.local .
@@ -49,8 +49,8 @@ EOF
 
 ## install alacritty
 echo -e "${GREEN}installing alacritty${NC}"
-sudo add-apt-repository ppa:mmstick76/alacritty
-sudo apt install -yq alacritty
+sudo add-apt -qq-repository ppa:mmstick76/alacritty
+sudo apt -qq install -yq alacritty
 
 # install nvim 
 echo -e "${GREEN}installing nvim...${NC}"
@@ -60,7 +60,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # required tools 
 echo -e "${GREEN}installing golang${NC}"
-sudo apt install -yq golang 
+sudo apt -qq -qq install -yq golang 
 
 echo -e "${GREEN}installing rust${NC}"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -68,7 +68,7 @@ echo -e "${GREEN}installing starship${NC}"
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 # docker
 echo -e "${GREEN}installing docker${NC}"
-sudo apt install -yq \
+sudo apt -qq install -yq \
     ca-certificates \
     curl \
     gnupg \
@@ -81,7 +81,7 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt update && sudo apt get install -yq docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt -qq update && sudo apt -qq get install -yq docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 echo -e "${GREEN}installing nerd fonts${NC}"
 curl -LOs https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip
