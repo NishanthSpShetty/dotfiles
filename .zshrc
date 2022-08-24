@@ -5,7 +5,7 @@ export LANG=en_IN.UTF-8
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/nishanth/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -113,11 +113,11 @@ then
 fi
 }
 
-set_path "/home/nishanth/installs/nvim-linux64/bin"
-set_path "/home/nishanth/.local/bin"
-set_path "/home/nishanth/go/bin"
-set_path "/home/nishanth/installs/go/bin"
-set_path "/home/nishanth/installs/android-studio/bin"
+set_path "$HOME/installs/nvim-linux64/bin"
+set_path "$HOME/.local/bin"
+set_path "$HOME/go/bin"
+set_path "$HOME/installs/go/bin"
+set_path "$HOME/installs/android-studio/bin"
 
 
 

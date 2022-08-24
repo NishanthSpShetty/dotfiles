@@ -13,3 +13,18 @@
 ### starship.toml
  
   starship shell prompt configuration
+
+
+### Setup
+
+Download the dotfile as zip or clone if you have git already installed
+
+```
+curl -L -O https://github.com/NishanthSpShetty/dotfiles/archive/refs/heads/master.zip
+
+unzip master.zip
+cd dotfiles-master/setups/
+./init.sh
+```
+
+> It will take few minutes to download all tools and setup the system, till then sip a tea
