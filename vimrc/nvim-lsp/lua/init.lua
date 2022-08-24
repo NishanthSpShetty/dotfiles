@@ -2,12 +2,16 @@
 require("mine.lsconf")
 require("mine.cmd")
 
+require("lualine").setup()
+
 require("nvim-tree").setup({
 	open_on_setup = true,
 	view = {
 		side = "left",
 		width = 30,
-		auto_resize = true,
+	},
+	system_open = {
+		cmd = nil,
 	},
 })
 require("mine.luasnp")

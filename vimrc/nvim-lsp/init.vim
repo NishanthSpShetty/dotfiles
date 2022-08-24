@@ -12,9 +12,9 @@ set encoding=UTF-8
 "encoding written to file.
 "set filecoding=UTF-8
 
+set tabstop=4
 set termguicolors
 
-set tabstop=4
 set expandtab
 set shiftwidth=4
 "set spell spelllang=en_us
@@ -29,8 +29,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " === Lets make vim look cool. ===
 Plugin 'morhetz/gruvbox'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+"
 
 " === Making vim more like IDE === 
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -42,6 +41,7 @@ Plugin 'tpope/vim-obsession'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'fatih/vim-go'
 " requires
+Plugin 'nvim-lualine/lualine.nvim'
 Plugin 'kyazdani42/nvim-web-devicons' " for file icons
 Plugin 'kyazdani42/nvim-tree.lua'
 
@@ -188,12 +188,6 @@ let g:gruvbox_contrast_dark = 'hard'
 colorscheme  gruvbox
 
 set laststatus=2
-"Show PASTE if in paste mode
-let g:airline_detect_paste=1
-"Show airline for tabs too
-let g:airline#extensions#tabline#enabled = 1
-"Use the solarized theme for the Airline status bar
-let g:airline_theme='gruvbox'
 
 " FZF fuzzy finder mapping
 noremap <leader>zf :Files<CR>
@@ -226,9 +220,6 @@ noremap <leader>gs :G<CR>
 
 "let g:python3_host_prog='/Users/nishanth/.pyenv/shims/python3'
 
-" === airblade/vim-gitgutter settings -----
-" In vim-airline, only display "hunks" if the diff is non-zero
-let g:airline#extensions#hunks#non_zero_only = 1
 
 " === Go/vim-go 
 augroup quickfix
