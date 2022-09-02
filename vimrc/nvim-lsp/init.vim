@@ -32,9 +32,9 @@ Plugin 'morhetz/gruvbox'
 "
 
 " === Making vim more like IDE === 
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plugin 'junegunn/fzf.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'preservim/tagbar'
 Plugin 'tpope/vim-obsession' 
@@ -70,11 +70,13 @@ Plugin 'rafamadriz/friendly-snippets'
 
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'puremourning/vimspector'
+Plugin 'nvim-telescope/telescope.nvim'
 
 Plugin 'nishanthspshetty/renamer.nvim' , { 'branch': 'develop' }
 Plugin 'simrat39/rust-tools.nvim'
 
 Plugin 'mhartington/formatter.nvim'
+Plugin 'mhanberg/elixir.nvim'
 
 call vundle#end()            
 
@@ -118,7 +120,7 @@ nmap t% :call OpenCurrentAsNewTab()<CR>
 nmap td :tabclose<CR>
 nmap tn :tabNext<CR>
 
-"split mapping Ctrl-a (confliucts with tmux) horizontal split, Ctrl-S vertical split.
+"split mapping Ctrl-a (conflicts with tmux) horizontal split, Ctrl-S vertical split.
 "nmap <C-a> :sp<CR> disabling for ---^^
 nmap <C-S> :vsp<CR>
 
@@ -190,9 +192,14 @@ colorscheme  gruvbox
 set laststatus=2
 
 " FZF fuzzy finder mapping
-noremap <leader>zf :Files<CR>
-noremap <silent><C-f> :Files<CR>
-noremap <silent><space>l :Lines<CR>
+"noremap <leader>zf :Files<CR>
+"noremap <silent><C-f> :Files<CR>
+"noremap <silent><space>l :Lines<CR>
+
+nnoremap <C-f> <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 "Syntastic configuration
 set statusline+=%#warningmsg#
