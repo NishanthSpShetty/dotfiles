@@ -1,18 +1,7 @@
 -- import all user defined and remote plugin here
-require("mine.lsconf")
 require("mine.cmd")
 
 require("lualine").setup()
-local elixir = require("elixir")
-elixir.setup({
-	cmd = { "/home/nishanth/.elixir-ls/release/language_server.sh" },
-	settings = elixir.settings({
-		dialyzerEnabled = true,
-		fetchDeps = false,
-		enableTestLenses = false,
-		suggestSpecs = false,
-	}),
-})
 
 require("nvim-tree").setup({
 	open_on_setup = true,
@@ -25,6 +14,7 @@ require("nvim-tree").setup({
 	},
 })
 
+require("mine.lsconf")
 require("Comment").setup()
 require("mine.luasnp")
 require("mine.tsitter")

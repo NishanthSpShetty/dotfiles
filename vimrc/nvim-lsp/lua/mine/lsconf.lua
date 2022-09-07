@@ -42,13 +42,10 @@ local on_attach = function(client, bufnr)
 	elseif client.resolved_capabilities.document_range_formatting then
 		buf_set_keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 	end
+
+	vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts)
 end
 
-require("rust-tools").setup({
-	server = {
-		on_attach = on_attach,
-	},
-})
 -- add capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -84,3 +81,20 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+-- additional lsp server config
+require("rust-tools").setup({
+	server = {
+		on_attach = on_attach,
+	},
+})
+
+local elixir = require("elixir")
+elixir.setup({
+	cmd = { "/home/nishanth/.elixir-ls/release/language_server.sh" },
+	on_attach = on_attach,
+	settings = elixir.settings({
+		dialyzerEnabled = true,
+		fetchDeps = true,
+	}),
+})
