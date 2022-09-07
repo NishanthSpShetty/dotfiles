@@ -71,12 +71,16 @@ Plugin 'rafamadriz/friendly-snippets'
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'puremourning/vimspector'
 Plugin 'nvim-telescope/telescope.nvim'
+Plugin 'sindrets/diffview.nvim'
+Plugin 'numToStr/Comment.nvim'
 
 Plugin 'nishanthspshetty/renamer.nvim' , { 'branch': 'develop' }
 Plugin 'simrat39/rust-tools.nvim'
 
 Plugin 'mhartington/formatter.nvim'
 Plugin 'mhanberg/elixir.nvim'
+
+Plugin 'shaunsingh/oxocarbon.nvim'
 
 call vundle#end()            
 
@@ -182,11 +186,11 @@ nnoremap <leader>nf :NvimTreeFindFile<CR>
 " Theme config
 "Toggle this to "light" for light colorscheme
 let g:gruvbox_contrast_dark = 'hard'
-
-"Uncomment the next line if your terminal is not configured for solarized
-"let g:solarized_termcolors=256
- let g:gruvbox_invert_selection='0'
- set background=dark
+"
+""Uncomment the next line if your terminal is not configured for solarized
+""let g:solarized_termcolors=256
+" let g:gruvbox_invert_selection='0'
+set background=dark
 colorscheme  gruvbox
 
 set laststatus=2
@@ -197,6 +201,7 @@ set laststatus=2
 "noremap <silent><space>l :Lines<CR>
 
 nnoremap <C-f> <cmd>Telescope find_files<cr>
+nnoremap <C-p> <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>

@@ -24,6 +24,8 @@ require("nvim-tree").setup({
 		cmd = nil,
 	},
 })
+
+require("Comment").setup()
 require("mine.luasnp")
 require("mine.tsitter")
 require("mine.utils")
