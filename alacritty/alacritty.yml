@@ -73,8 +73,9 @@ font:
     #family: Iosevka
     # style: Light
     # family: "Fira Code"
+    #family: "agave Nerd Font"
+    # family: "Monospace"
     family: "agave Nerd Font"
-    #   family: "Hack Nerd Font"
     style: "Regular" #"Light Oblique" 
 
   # The bold font face
@@ -126,7 +127,7 @@ font:
   #
   # This is a global setting and will require a log out or restart to take
   # effect.
-  use_thin_strokes: true
+  # use_thin_strokes: true
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
