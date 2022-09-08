@@ -3,6 +3,7 @@ BLUE='\033[0;34m'
 
 RED='\033[0;31m'
 NC='\033[0m'
+echo "${BLUE} running updater...${NC}"
 
 TEMP=~/update_nvim
 mkdir $TEMP
@@ -15,5 +16,5 @@ echo "${BLUE}extracting tar${NC}"
 tar -xzf $TEMP/nvim-linux64.tar.gz -C $TEMP/
 
 echo "${BLUE}copying binary${NC}"
-cp -rf $TEMP/nvim-linux64/ $HOME/installs/
+cp -rf $TEMP/nvim-linux64/* $HOME/installs/nvim-linux64/
 echo "${BLUE}done${NC}"
