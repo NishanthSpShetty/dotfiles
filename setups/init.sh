@@ -91,4 +91,13 @@ fc-cache -fv
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+cargo install exa
+cargo install bat
+cargo install git-delta
+cargo install ripgrep
+cargo install stylua
+
+# this more likely to fail with compile error
+cargo install btm
+
 echo -e "${RED} Setup completed, hack away${NC}"
