@@ -81,7 +81,7 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt -qq update && sudo apt -qq get install -yq docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt -qq update && sudo apt -qq install -yq docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 echo -e "${GREEN}installing nerd fonts${NC}"
 curl -LOs https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip
@@ -90,6 +90,9 @@ fc-cache -fv
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# source cargo path
+. $HOME/.cargo/env
 
 cargo install exa
 cargo install bat
