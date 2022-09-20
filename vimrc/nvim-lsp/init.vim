@@ -79,6 +79,7 @@ Plugin 'simrat39/rust-tools.nvim'
 
 Plugin 'mhartington/formatter.nvim'
 Plugin 'mhanberg/elixir.nvim'
+Plugin 'elixir-editors/vim-elixir'
 
 Plugin 'shaunsingh/oxocarbon.nvim'
 
