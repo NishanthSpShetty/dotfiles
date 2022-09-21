@@ -85,6 +85,7 @@ Plugin 'mfussenegger/nvim-dap'
 Plugin 'rcarriga/nvim-dap-ui'
 Plugin 'nvim-telescope/telescope-dap.nvim'
 Plugin 'leoluz/nvim-dap-go'
+Plugin 'theHamsta/nvim-dap-virtual-text'
 
 call vundle#end()            
 

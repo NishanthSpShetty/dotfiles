@@ -89,12 +89,25 @@ require("rust-tools").setup({
 	},
 })
 
-local elixir = require("elixir")
-elixir.setup({
-	cmd = { "/home/nishanth/.elixir-ls/release/language_server.sh" },
-	on_attach = on_attach,
-	settings = elixir.settings({
-		dialyzerEnabled = true,
-		fetchDeps = true,
-	}),
-})
+local function elixirLsp()
+	local elixir = require("elixir")
+
+	-- setup when the mix project is present
+	local cwd = vim.loop.cwd()
+	local mix_exs_fullpath = table.concat({ cwd, "mix.exs" }, "/")
+	local file_exists = not vim.tbl_isempty(vim.loop.fs_stat(mix_exs_fullpath) or {})
+
+	if file_exists then
+		elixir.setup({
+			cmd = { "/home/nishanth/.elixir-ls/release/language_server.sh" },
+			on_attach = on_attach,
+			capabilities = capabilities,
+			settings = elixir.settings({
+				dialyzerEnabled = true,
+				fetchDeps = true,
+			}),
+		})
+	end
+end
+
+elixirLsp()
