@@ -21,3 +21,5 @@ require("mine.tsitter")
 require("mine.utils")
 require("mine.luaformt")
 require("mine.dap")
+
+require("telescope").load_extension("dap")
