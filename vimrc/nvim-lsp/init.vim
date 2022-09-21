@@ -338,14 +338,14 @@ autocmd FileType asm set ft=nasm
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 
-" neovim lua config import
-" 
 augroup FormatAutogroup
   autocmd!
   autocmd BufWritePost *.lua FormatWrite
 augroup END
 
 
+" neovim lua config import
+" 
 lua require("init")
 
 
