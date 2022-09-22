@@ -65,6 +65,7 @@ Plugin 'hrsh7th/cmp-cmdline'
 Plugin 'hrsh7th/cmp-nvim-lsp' 
 Plugin 'saadparwaiz1/cmp_luasnip'
 " snippets
+Plugin 'onsails/lspkind.nvim'
 Plugin  'L3MON4D3/LuaSnip'
 Plugin 'rafamadriz/friendly-snippets'
 

@@ -25,22 +25,45 @@ luasnip.config.set_config({
 	},
 })
 
+-- add sample snippet
+luasnip.add_snippets("lua", {
+	luasnip.s("sample", {
+		luasnip.t("--this is new snippet"),
+	}),
+})
+
 local check_backspace = function()
 	local col = vim.fn.col(".") - 1
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
+local lspkind = require("lspkind")
+lspkind.init({
+	-- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+	mode = "symbol_text",
+})
+
 cmp.setup({
+
+	formatting = {
+		format = lspkind.cmp_format({
+			menu = {
+				buffer = "[buf]",
+				nvim_lsp = "[LSP]",
+				luasnip = "[snip]",
+				path = "[path]",
+			},
+		}),
+	},
+
 	snippet = {
 		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
+			luasnip.lsp_expand(args.body)
 		end,
 	},
 	mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
@@ -95,15 +118,15 @@ cmp.setup({
 
 	sources = {
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
 		{ name = "buffer" },
+		{ name = "luasnip" },
 		{ name = "path" },
 	},
 
-	confirm_opts = {
-		behavior = cmp.ConfirmBehavior.Replace,
-		select = false,
-	},
+	--	confirm_opts = {
+	--		behavior = cmp.ConfirmBehavior.Replace,
+	--		select = false,
+	--	},
 	window = {
 		bordered = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 	},

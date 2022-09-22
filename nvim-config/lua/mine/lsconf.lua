@@ -73,6 +73,7 @@ local servers = {
 	--     "rust_analyzer",
 	"tsserver",
 	"gopls",
+	"sumneko_lua",
 }
 
 for _, lsp in ipairs(servers) do
