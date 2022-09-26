@@ -45,9 +45,9 @@ local on_attach = function(client, bufnr)
 		buf_set_keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 	end
 
-	vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts)
+	buf_set_keymap("n", "<space>r", "<cmd>lua vim.lsp.codelens.refresh()<CR>", opts)
+	buf_set_keymap("n", "<space>cr", "<cmd>RustHoverActions<CR>", opts)
 end
-
 -- add capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -87,9 +87,22 @@ end
 
 -- additional lsp server config
 require("rust-tools").setup({
+	tools = {
+		autoSetHints = true,
+		runnables = { use_telescope = true },
+		inlay_hints = { show_parameter_hints = true },
+		hover_actions = { auto_focus = true },
+	},
 	server = {
 		on_attach = on_attach,
 	},
+	--	dap = {
+	--		adapter = {
+	--			type = "executable",
+	--			command = "lldb-vscode",
+	--			name = "rt_lldb",
+	--		},
+	--	},
 })
 
 local function elixirLsp()
