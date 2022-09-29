@@ -123,10 +123,10 @@ cmp.setup({
 		{ name = "path" },
 	},
 
-	--	confirm_opts = {
-	--		behavior = cmp.ConfirmBehavior.Replace,
-	--		select = false,
-	--	},
+	confirm_opts = {
+		behavior = cmp.ConfirmBehavior.Replace,
+		select = false,
+	},
 	window = {
 		bordered = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 	},
