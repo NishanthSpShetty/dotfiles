@@ -76,6 +76,7 @@ local servers = {
 	"tsserver",
 	"gopls",
 	"sumneko_lua",
+	--	"haskell-language-server-wrapper",
 }
 
 for _, lsp in ipairs(servers) do
@@ -84,6 +85,16 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+nvim_lsp.hls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		haskell = {
+			hlintOn = false,
+		},
+	},
+})
 
 -- additional lsp server config
 require("rust-tools").setup({

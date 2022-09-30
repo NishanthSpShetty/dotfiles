@@ -74,7 +74,7 @@ Plugin 'nvim-telescope/telescope.nvim'
 Plugin 'sindrets/diffview.nvim'
 Plugin 'numToStr/Comment.nvim'
 
-Plugin 'nishanthspshetty/renamer.nvim' , { 'branch': 'develop' }
+Plugin 'filipdutescu/renamer.nvim' , { 'branch': 'master' }
 Plugin 'simrat39/rust-tools.nvim'
 
 Plugin 'mhartington/formatter.nvim'
