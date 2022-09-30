@@ -88,6 +88,8 @@ Plugin 'nvim-telescope/telescope-dap.nvim'
 Plugin 'leoluz/nvim-dap-go'
 Plugin 'theHamsta/nvim-dap-virtual-text'
 
+Plugin 'stevearc/dressing.nvim'
+
 call vundle#end()            
 
 "turn back filetype plugin and indentation on
