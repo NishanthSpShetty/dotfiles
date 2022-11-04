@@ -90,6 +90,10 @@ Plugin 'theHamsta/nvim-dap-virtual-text'
 
 Plugin 'stevearc/dressing.nvim'
 
+Plugin 'folke/noice.nvim'
+Plugin 'MunifTanjim/nui.nvim'
+Plugin 'rcarriga/nvim-notify'
+
 call vundle#end()            
 
 "turn back filetype plugin and indentation on

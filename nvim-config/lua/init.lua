@@ -39,3 +39,5 @@ require("dressing").setup({
 		end,
 	},
 })
+
+require("noice").setup()
