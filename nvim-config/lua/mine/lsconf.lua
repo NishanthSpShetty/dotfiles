@@ -1,5 +1,6 @@
 local nvim_lsp = require("lspconfig")
 
+require("renamer").setup()
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -14,8 +15,6 @@ local on_attach = function(client, bufnr)
 
     -- Mappings.
     local opts = { noremap = true, silent = true }
-
-    require("renamer").setup()
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -50,7 +49,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "<space>cr", "<cmd>RustHoverActions<CR>", opts)
 end
 -- add capabilities
-local capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -72,11 +71,11 @@ vim.o.updatetime = 250
 
 local servers = {
     "pyright",
+    "clangd",
     --     "rust_analyzer",
     "tsserver",
     "gopls",
-    "sumneko_lua",
-    "clangd",
+    "lua_ls",
     --	"haskell-language-server-wrapper",
 }
 
@@ -87,37 +86,12 @@ for _, lsp in ipairs(servers) do
     })
 end
 
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
 nvim_lsp.hls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
         haskell = {
             hlintOn = false,
-        },
-
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = "LuaJIT",
-                -- Setup your lua path
-                path = runtime_path,
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { "vim" },
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-                enable = false,
-            },
         },
     },
 })

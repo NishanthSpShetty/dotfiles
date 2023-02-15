@@ -61,6 +61,7 @@ cmp.setup({
             luasnip.lsp_expand(args.body)
         end,
     },
+    preselect = cmp.PreselectMode.None,
     mapping = {
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -73,8 +74,8 @@ cmp.setup({
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
+                --         elseif luasnip.expand_or_jumpable() then
+                --            luasnip.expand_or_jump()
             elseif check_backspace() then
                 fallback()
             else
@@ -85,8 +86,8 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
+                --elseif luasnip.jumpable(-1) then
+                --   luasnip.jump(-1)
             else
                 fallback()
             end

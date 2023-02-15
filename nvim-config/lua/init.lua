@@ -4,7 +4,6 @@ require("mine.cmd")
 require("lualine").setup()
 
 require("nvim-tree").setup({
-    open_on_setup = true,
     view = {
         side = "left",
         width = 30,
@@ -41,3 +40,10 @@ require("dressing").setup({
 })
 
 require("noice").setup()
+
+local function open_nvim_tree()
+    -- open the tree
+    require("nvim-tree.api").tree.open()
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
