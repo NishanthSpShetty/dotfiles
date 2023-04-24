@@ -10,11 +10,11 @@ mkdir $TEMP
 
 echo  "${BLUE}downloading latest nightly from repo ${NC}"
 
-curl -L -o $TEMP/nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+curl -L -o $TEMP/nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz
 
 echo "${BLUE}extracting tar${NC}"
 tar -xzf $TEMP/nvim-linux64.tar.gz -C $TEMP/
 
 echo "${BLUE}copying binary${NC}"
-cp -rf $TEMP/nvim-linux64/* $HOME/installs/nvim-linux64/
+cp -rf $TEMP/nvim-linux64/* $HOME/installs/nvim/
 echo "${BLUE}done${NC}"

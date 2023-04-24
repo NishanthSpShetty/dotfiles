@@ -30,7 +30,7 @@ require("dressing").setup({
                 return {
                     backend = "nui",
                     nui = {
-                        relative = "cursor",
+                        -- relative = "cursor",
                         max_width = 40,
                     },
                 }
@@ -39,7 +39,7 @@ require("dressing").setup({
     },
 })
 
-require("noice").setup()
+-- require("noice").setup()
 
 local function open_nvim_tree()
     -- open the tree

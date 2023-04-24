@@ -76,6 +76,7 @@ local servers = {
     "tsserver",
     "gopls",
     "lua_ls",
+    "erlangls",
     --	"haskell-language-server-wrapper",
 }
 
