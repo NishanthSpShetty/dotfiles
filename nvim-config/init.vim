@@ -32,10 +32,6 @@ Plugin 'morhetz/gruvbox'
 "
 
 " === Making vim more like IDE === 
-"Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plugin 'junegunn/fzf.vim'
-"Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'preservim/tagbar'
 Plugin 'tpope/vim-obsession' 
 Plugin 'rhysd/vim-clang-format'
@@ -162,32 +158,6 @@ nmap <C-l> <C-w>l
 
 "=================Plugin configs==============
 
-"Nerdtree mappings
-
-""Open/close NERDTree Tabs with \t
-"nmap <silent> <leader>t :NERDTreeTabsToggle<CR> 
-"noremap <silent> <leader>nf :NERDTreeFind<CR>
-""To have NERDTree always open on startup
-"let g:nerdtree_tabs_open_on_console_startup = 1
-"
-"let g:NERDTreeGitStatusIndicatorMapCustom = {
-"                \ 'Modified'  :'✹',
-"                \ 'Staged'    :'✚',
-"                \ 'Untracked' :'✭',
-"                \ 'Renamed'   :'➜',
-"                \ 'Unmerged'  :'═',
-"                \ 'Deleted'   :'✖',
-"                \ 'Dirty'     :'✗',
-"                \ 'Ignored'   :'☒',
-"                \ 'Clean'     :'✔︎',
-"                \ 'Unknown'   :'?',
-"		\ }
-"let g:NERDTreeGitStatusShowClean = 1
-"" Start NERDTree. If a file is specified, move the cursor to its window.
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
-" ============================================
-"
 " vim-tree config
 nnoremap <silent> <leader>t :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
@@ -200,8 +170,6 @@ nnoremap <leader>nf :NvimTreeFindFile<CR>
 let g:gruvbox_contrast_dark = 'hard'
 "
 ""Uncomment the next line if your terminal is not configured for solarized
-""let g:solarized_termcolors=256
-" let g:gruvbox_invert_selection='0'
 set background=dark
 colorscheme  gruvbox
 
@@ -219,11 +187,6 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fs <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-"Syntastic configuration
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" if hidden is not set, TextEdit might fail.
 set hidden
 " Better display for messages
 set cmdheight=2
@@ -233,10 +196,6 @@ set updatetime=300
 set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
-
-"set list
-"set listchars=tab:▸\ ,eol:¬
-
 
 
 "Fugitive configuration
@@ -281,15 +240,6 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
 
-" ============== easymotion
-"map <Leader> <Plug>(easymotion-prefix)
-
-
-" rainbow
-let g:rainbow_active = 1
-
-"tagbar 
-nmap <space>t :TagbarToggle<CR>
 
 function! CloseRustOutIfOpen()
 	if bufwinnr('rust.out') >0 
