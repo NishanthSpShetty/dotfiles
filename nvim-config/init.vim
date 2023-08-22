@@ -23,6 +23,9 @@ set shiftwidth=4
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
+let g:opamshare = substitute(system('opam var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'

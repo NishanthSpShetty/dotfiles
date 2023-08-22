@@ -14,6 +14,8 @@ require("nvim-tree").setup({
     },
 })
 
+require("renamer").setup()
+
 require("mine.lsconf")
 require("Comment").setup()
 require("mine.luasnp")
@@ -31,7 +33,7 @@ require("dressing").setup({
                 return {
                     backend = "nui",
                     nui = {
-                        relative = "cursor",
+                        --                        relative = "cursor",
                         max_width = 40,
                     },
                 }
@@ -40,4 +42,4 @@ require("dressing").setup({
     },
 })
 
-require("noice").setup()
+--require("noice").setup()

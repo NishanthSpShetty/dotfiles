@@ -15,8 +15,6 @@ local on_attach = function(client, bufnr)
     -- Mappings.
     local opts = { noremap = true, silent = true }
 
-    require("renamer").setup()
-
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
     buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -48,6 +46,10 @@ local on_attach = function(client, bufnr)
 
     buf_set_keymap("n", "<space>r", "<cmd>lua vim.lsp.codelens.refresh()<CR>", opts)
     buf_set_keymap("n", "<space>cr", "<cmd>RustHoverActions<CR>", opts)
+
+    if client.server_capabilities.inlayHintProvider then
+        vim.lsp.buf.inlay_hint(bufnr, true)
+    end
 end
 -- add capabilities
 local capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -75,13 +77,19 @@ local servers = {
     --     "rust_analyzer",
     "tsserver",
     "gopls",
-    "sumneko_lua",
+    "lua_ls",
     "clangd",
+    "ocamllsp",
     --	"haskell-language-server-wrapper",
 }
 
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
+        settings = {
+            gopls = {
+                gofumpt = true,
+            },
+        },
         on_attach = on_attach,
         capabilities = capabilities,
     })
