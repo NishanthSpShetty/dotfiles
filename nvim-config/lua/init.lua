@@ -4,14 +4,13 @@ require("mine.cmd")
 require("lualine").setup()
 
 require("nvim-tree").setup({
-    open_on_setup = true,
-    view = {
-        side = "left",
-        width = 30,
-    },
-    system_open = {
-        cmd = nil,
-    },
+	view = {
+		side = "left",
+		width = 30,
+	},
+	system_open = {
+		cmd = nil,
+	},
 })
 
 require("renamer").setup()
@@ -23,23 +22,31 @@ require("mine.tsitter")
 require("mine.utils")
 require("mine.luaformt")
 require("mine.dap")
+require("lspsaga").setup({})
 
 require("telescope").load_extension("dap")
 
 require("dressing").setup({
-    select = {
-        get_config = function(opts)
-            if opts.kind == "codeaction" then
-                return {
-                    backend = "nui",
-                    nui = {
-                        --                        relative = "cursor",
-                        max_width = 40,
-                    },
-                }
-            end
-        end,
-    },
+
+	select = {
+		get_config = function(opts)
+			if opts.kind == "codeaction" then
+				return {
+					backend = "nui",
+					nui = {
+						relative = "cursor",
+						max_width = 40,
+					},
+				}
+			end
+		end,
+	},
 })
 
---require("noice").setup()
+local function open_nvim_tree()
+	-- open the tree
+	require("nvim-tree.api").tree.open()
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+

@@ -34,12 +34,24 @@ dap.configurations.python = {
 }
 
 -- C/C++/Rust
+--
+local function get_lldb_dap(mac)
+    local lldb = {
+        type = "executable",
+        name = "lldb",
+    }
 
-dap.adapters.lldb = {
-    type = "executable",
-    command = "/usr/bin/lldb-vscode-14", -- adjust as needed, must be absolute path
-    name = "lldb",
-}
+    if mac then
+        lldb.command = "/Users/nishanth/.vscode/extensions/lanza.lldb-vscode-0.2.3/bin/darwin/bin/lldb-vscode"
+    else
+        lldb.command = "/usr/bin/lldb-vscode-14" -- adjust as needed, must be absolute path
+    end
+
+    lldb.command = "/Users/nishanth/.vscode/extensions/lanza.lldb-vscode-0.2.3/bin/darwin/bin/lldb-vscode"
+    return lldb
+end
+
+dap.adapters.lldb = get_lldb_dap(vim.fn.has("macunix"))
 
 dap.configurations.cpp = {
     {
