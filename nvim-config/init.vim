@@ -44,6 +44,7 @@ Plugin 'fatih/vim-go'
 Plugin 'nvim-lualine/lualine.nvim'
 Plugin 'kyazdani42/nvim-web-devicons' " for file icons
 Plugin 'kyazdani42/nvim-tree.lua'
+Plugin 'nvimdev/lspsaga.nvim'
 
 " == that one plugin to add intellisense
 
