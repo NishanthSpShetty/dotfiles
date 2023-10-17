@@ -13,6 +13,8 @@ require("nvim-tree").setup({
 	},
 })
 
+require("renamer").setup()
+
 require("mine.lsconf")
 require("Comment").setup()
 require("mine.luasnp")
@@ -25,6 +27,7 @@ require("lspsaga").setup({})
 require("telescope").load_extension("dap")
 
 require("dressing").setup({
+
 	select = {
 		get_config = function(opts)
 			if opts.kind == "codeaction" then
@@ -40,11 +43,10 @@ require("dressing").setup({
 	},
 })
 
---require("noice").setup()
-
 local function open_nvim_tree()
 	-- open the tree
 	require("nvim-tree.api").tree.open()
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+

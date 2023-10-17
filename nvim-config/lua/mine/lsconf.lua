@@ -47,6 +47,7 @@ local on_attach = function(client, bufnr)
 
 	buf_set_keymap("n", "<space>r", "<cmd>lua vim.lsp.codelens.refresh()<CR>", opts)
 	buf_set_keymap("n", "<space>cr", "<cmd>RustHoverActions<CR>", opts)
+
 end
 -- add capabilities
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -70,20 +71,26 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 vim.o.updatetime = 250
 
 local servers = {
-	"pyright",
-	"clangd",
-	--     "rust_analyzer",
-	"tsserver",
-	"gopls",
-	"lua_ls",
-	--	"haskell-language-server-wrapper",
+    "pyright",
+    "tsserver",
+    "gopls",
+    "lua_ls",
+    "clangd",
+    "ocamllsp",
+    "zls",
+    --	"haskell-language-server-wrapper",
 }
 
 for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-	})
+    nvim_lsp[lsp].setup({
+        settings = {
+            gopls = {
+                gofumpt = true,
+            },
+        },
+        on_attach = on_attach,
+        capabilities = capabilities,
+    })
 end
 
 nvim_lsp.hls.setup({
