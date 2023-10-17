@@ -34,7 +34,7 @@ require("dressing").setup({
 				return {
 					backend = "nui",
 					nui = {
-						relative = "cursor",
+						--						relative = "cursor",
 						max_width = 40,
 					},
 				}
@@ -49,4 +49,3 @@ local function open_nvim_tree()
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-
