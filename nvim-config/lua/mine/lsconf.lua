@@ -80,6 +80,7 @@ local servers = {
     "lua_ls",
     "clangd",
     "ocamllsp",
+    "zls",
     --	"haskell-language-server-wrapper",
 }
 
