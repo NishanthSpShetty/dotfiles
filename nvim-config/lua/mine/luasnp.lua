@@ -122,6 +122,7 @@ cmp.setup({
         { name = "buffer" },
         { name = "luasnip" },
         { name = "path" },
+        { name = "nvim_lsp_signature_help" },
     },
 
     confirm_opts = {

@@ -68,6 +68,7 @@ Plugin 'hrsh7th/cmp-path'
 Plugin 'hrsh7th/cmp-cmdline' 
 Plugin 'hrsh7th/cmp-nvim-lsp' 
 Plugin 'saadparwaiz1/cmp_luasnip'
+Plugin 'hrsh7th/cmp-nvim-lsp-signature-help'
 " snippets
 Plugin 'onsails/lspkind.nvim'
 Plugin  'L3MON4D3/LuaSnip'
