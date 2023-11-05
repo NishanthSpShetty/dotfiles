@@ -77,6 +77,7 @@ Plugin 'nvim-lua/plenary.nvim'
 Plugin 'nvim-telescope/telescope.nvim'
 Plugin 'sindrets/diffview.nvim'
 Plugin 'numToStr/Comment.nvim'
+Plugin 'ray-x/lsp_signature.nvim'
 
 Plugin 'filipdutescu/renamer.nvim' , { 'branch': 'master' }
 Plugin 'simrat39/rust-tools.nvim'

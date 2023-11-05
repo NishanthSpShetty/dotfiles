@@ -66,6 +66,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
     underline = true,
     signs = true,
 })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { focusable = false })
 -- on hover show any line diagnostics
 vim.o.updatetime = 250
 
@@ -99,6 +100,13 @@ nvim_lsp.hls.setup({
         haskell = {
             hlintOn = false,
         },
+    },
+})
+
+require("lsp_signature").setup({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    handler_opts = {
+        border = "rounded",
     },
 })
 
